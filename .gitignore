@@ -1,0 +1,14 @@
+# Python
+*.pyc
+__pycache__/
+
+# Environnement virtuel
+.venv/
+
+# Données locales ou volumineuses
+data/
+video.mp4
+
+# IDE / éditeurs
+.vscode/
+.idea/
