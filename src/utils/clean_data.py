@@ -17,15 +17,34 @@ def clean_data():
     os.makedirs(CLEAN_DIR, exist_ok=True)
 
     print("Lecture du fichier brut...")
-    df = pd.read_csv(RAW_FILE)
+    df = pd.read_csv(RAW_FILE, low_memory=False)  # Ajout de low_memory=False pour éviter l'avertissement
 
     print("Nettoyage des données...")
-    # Ne pas supprimer toutes les lignes avec NA
-    # Au lieu de ça, on peut :
-    df = df.fillna("NC")  # Remplacer les NA par "NC"
-    df = df.drop_duplicates()  # Supprimer les doublons
-    df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
+    # Remplir les valeurs manquantes
+    # Colonnes numériques à traiter
+    numeric_columns = [
+        'Note Ecart rémunération',
+        'Note Ecart taux d\'augmentation (hors promotion)',
+        'Note Ecart taux de promotion',
+        'Note Ecart taux d\'augmentation',
+        'Note Retour congé maternité',
+        'Note Hautes rémunérations',
+        'Note Index'
+    ]
 
+    # Remplacer les valeurs vides par NaN pour les colonnes numériques
+    for col in numeric_columns:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+
+    # Remplacer les valeurs manquantes par "NC" pour les colonnes texte
+    text_columns = [col for col in df.columns if col not in numeric_columns]
+    
+    # Supprimer les doublons
+    df = df.drop_duplicates()
+    
+    # Nettoyer les noms de colonnes
+    df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
+    
     print("Sauvegarde du fichier nettoyé...")
     df.to_csv(CLEAN_FILE, index=False)
     print(f"Données nettoyées enregistrées dans {CLEAN_FILE}")
