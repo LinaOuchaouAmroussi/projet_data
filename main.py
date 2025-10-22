@@ -1,12 +1,3 @@
 import pandas as pd
 
-# Lire le fichier Excel
-excel_file = "index.xlsx"
-df = pd.read_excel(excel_file)
-
-# Afficher un aperçu des données
-print(df.head())
-
-# Sauvegarder en CSV
-csv_file = "index.csv"
-df.to_csv(csv_file, index=False)  # index=False pour ne pas ajouter la colonne d'index
+#ajouter le fait qu il lance bien get_data d ici et clean_data d ici aussi 
