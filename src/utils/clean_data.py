@@ -19,10 +19,11 @@ def clean_data():
     print("Lecture du fichier brut...")
     df = pd.read_csv(RAW_FILE)
 
-    # Exemple de nettoyage simple
     print("Nettoyage des données...")
-    df = df.dropna()  # Supprime les lignes vides
-    df = df.drop_duplicates()
+    # Ne pas supprimer toutes les lignes avec NA
+    # Au lieu de ça, on peut :
+    df = df.fillna("NC")  # Remplacer les NA par "NC"
+    df = df.drop_duplicates()  # Supprimer les doublons
     df.columns = [c.strip().lower().replace(" ", "_") for c in df.columns]
 
     print("Sauvegarde du fichier nettoyé...")
