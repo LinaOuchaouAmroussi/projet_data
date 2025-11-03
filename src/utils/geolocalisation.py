@@ -6,24 +6,24 @@ import geopandas
 data = pd.read_csv("data/cleaned/cleaneddata.csv")
 
 # on garde les colonnes utiles pour notre map
-data = data[["Raison Sociale", "Région", "Département", "Note Index"]]
+data = data[["raison_sociale", "région", "département", "note_index"]]
 
 # on nettoie
-data = data[data["Note Index"] != "NC"] # a changer quand on aura nettoyer nos données == nan
-data["Note Index"] = data["Note Index"].astype(float)
+data = data[data["note_index"] != "NC"] # a changer quand on aura nettoyer nos données == nan
+data["note_index"] = data["note_index"].astype(float)
 
 # on crée la moyenne par département
-index_par_dep = data.groupby("Département")["Note Index"].mean().reset_index()
+index_par_dep = data.groupby("département")["note_index"].mean().reset_index()
 
 # on charge la carte des départements ####ATTENTION ON A PAS CA 
 geo_df = geopandas.read_file("data/raw/departements.geojson")
 
 # on nettoie les noms pour le merge
 geo_df["nom"] = geo_df["nom"].str.lower()
-index_par_dep["Département"] = index_par_dep["Département"].str.lower()
+index_par_dep["département"] = index_par_dep["département"].str.lower()
 
 # on fusionne les deux dataframes
-merged = geo_df.merge(index_par_dep, left_on="nom", right_on="Département")
+merged = geo_df.merge(index_par_dep, left_on="nom", right_on="département")
 
 # maintenant on crée la carte
 coords = (46.603354, 1.888334) #on centre la carte sur la France (coordonnées du centre de la france)
@@ -32,7 +32,7 @@ map_france = folium.Map(location=coords, zoom_start=6) # on crée la map avce fo
 folium.Choropleth(
     geo_data="data/raw/departements.geojson", #non mais 
     data=merged,
-    columns=["nom", "Note Index"],
+    columns=["nom", "note_index"],
     key_on="feature.properties.nom",
     fill_color="YlOrRd",
     fill_opacity=0.7,
