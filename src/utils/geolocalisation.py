@@ -60,5 +60,5 @@ geojson_layer = folium.GeoJson(
     )
 ).add_to(carte)
 
-carte.save("data/output/carte_egalite.html")
+carte.save("data/outputs/carte_egalite.html")
 print("Carte générée : data/outputs/carte_egalite.html")
