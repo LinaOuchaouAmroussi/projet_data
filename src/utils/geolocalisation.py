@@ -1,45 +1,64 @@
-import pandas as pd
-import folium
-import geopandas
+import pandas as pd #on importe pandas pour la manipulation des données
+import folium #on importe folium pour la création de cartes interactives
+import geojson, geopandas #on importe geojson et geopandas pour la manipulation de données géospatiales
 
-# on charge nos données
-data = pd.read_csv("data/cleaned/cleaneddata.csv")
 
-# on garde les colonnes utiles pour notre map
-data = data[["raison_sociale", "région", "département", "note_index"]]
+# on lit les données
+data = pd.read_csv("data/cleaned/cleaneddata.csv")  # ton fichier nettoyé
+france_dpt = geopandas.read_file("data/raw/departements.json")  # géodonnées
 
-# on nettoie
-data = data[data["note_index"] != "NC"] # a changer quand on aura nettoyer nos données == nan
-data["note_index"] = data["note_index"].astype(float)
+# On retire les lignes où la note n’est pas renseignée
+data_filtered = data.dropna(subset=['note_index'])
 
-# on crée la moyenne par département
-index_par_dep = data.groupby("département")["note_index"].mean().reset_index()
+# On calcule la moyenne par département
+moyennes_dpt = data_filtered.groupby('département')['note_index'].mean().reset_index()
 
-# on charge la carte des départements ####ATTENTION ON A PAS CA 
-geo_df = geopandas.read_file("data/raw/departements.geojson")
+# On renomme pour correspondre au GeoJSON
+moyennes_dpt.rename(columns={'département': 'nom', 'note_index': 'note_moyenne'}, inplace=True)
 
-# on nettoie les noms pour le merge
-geo_df["nom"] = geo_df["nom"].str.lower()
-index_par_dep["département"] = index_par_dep["département"].str.lower()
+# Fusion entre les départements géographiques et les moyennes
+geo_merged = france_dpt.merge(moyennes_dpt, on='nom', how='left')
 
-# on fusionne les deux dataframes
-merged = geo_df.merge(index_par_dep, left_on="nom", right_on="département")
+# Création d'une carte centrée sur la France
+carte = folium.Map(location=[46.5, 2], zoom_start=6, tiles='cartodb positron')
 
-# maintenant on crée la carte
-coords = (46.603354, 1.888334) #on centre la carte sur la France (coordonnées du centre de la france)
-map_france = folium.Map(location=coords, zoom_start=6) # on crée la map avce folium
-
+# Ajout du choroplèthe
 folium.Choropleth(
-    geo_data="data/raw/departements.geojson", #non mais 
-    data=merged,
-    columns=["nom", "note_index"],
-    key_on="feature.properties.nom",
-    fill_color="YlOrRd",
+    geo_data=geo_merged,
+    name='Score égalité pro',
+    data=geo_merged,
+    columns=['nom', 'note_moyenne'],
+    key_on='feature.properties.nom',
+    fill_color='YlGnBu',
+    nan_fill_color='lightgrey',
     fill_opacity=0.7,
     line_opacity=0.2,
-    legend_name="Index égalité homme/femme moyen par département"
-).add_to(map_france)
+    legend_name='Note moyenne égalité professionnelle par département',
+).add_to(carte)
 
-# on sauvegarde notre map
-map_france.save("data/cleaned/map_index_egalite.html")
-#print("Carte créée : data/cleaned/map_index_egalite.html")
+geojson_layer = folium.GeoJson(
+    geo_merged,
+    name="Détails des départements",
+    style_function=lambda x: {
+        "color": "transparent",   # pas de contour bleu
+        "weight": 0
+    },
+    highlight_function=lambda x: {
+        "weight": 2,
+        "color": "black",
+        "fillOpacity": 0.8
+    },
+    tooltip=folium.GeoJsonTooltip(
+        fields=["nom", "note_moyenne"],
+        aliases=["Département :", "Note moyenne :"],
+        localize=True,
+        sticky=True
+    ),
+    popup=folium.GeoJsonPopup(
+        fields=["nom", "note_moyenne"],
+        labels=False
+    )
+).add_to(carte)
+
+carte.save("data/output/carte_egalite.html")
+print("Carte générée : data/output/carte_egalite.html")
