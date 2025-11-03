@@ -1,6 +1,6 @@
 import pandas as pd #on importe pandas pour la manipulation des données
 import folium #on importe folium pour la création de cartes interactives
-import geojson, geopandas #on importe geojson et geopandas pour la manipulation de données géospatiales
+import geopandas #on importe geojson et geopandas pour la manipulation de données géospatiales
 
 
 # on lit les données
