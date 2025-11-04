@@ -1,12 +1,9 @@
 import plotly.express as px
-from . import df, YEAR_COLUMN, SIZE_COLUMN
+from src.components import df, YEAR_COLUMN, SIZE_COLUMN
 
 def create_size_evolution_plot():
-    """
-    Crée le graphique d'évolution des notes par taille d'entreprise
-    avec animation temporelle
-    """
-    # Calculer les moyennes par année et taille
+    """Creates the animated evolution plot by company size"""
+    # Calculate means by year and size
     means = (df.groupby([YEAR_COLUMN, SIZE_COLUMN])
             ['note_index'].mean().reset_index())
     
@@ -23,20 +20,18 @@ def create_size_evolution_plot():
         }
     )
     
-    # Mise en page améliorée
+    # Update layout for consistent style
     fig.update_layout(
+        height=600,
+        width=800,
+        showlegend=True,
         title_x=0.5,
         xaxis_title="Tranche d'effectifs",
         yaxis_title="Note moyenne",
-        showlegend=True,
-        template="plotly_white",
-        height=600,
-        width=1000,
-        plot_bgcolor='white',
-        paper_bgcolor='white'
+        template="plotly_white"
     )
     
-    # Améliorer l'apparence des lignes et points
+    # Add markers and improve line visibility
     fig.update_traces(
         mode='lines+markers',
         line=dict(width=3),
@@ -47,7 +42,7 @@ def create_size_evolution_plot():
         )
     )
     
-    # Animation plus fluide
+    # Smooth animation
     fig.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 1000
     fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 500
     

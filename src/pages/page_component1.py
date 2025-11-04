@@ -1,30 +1,42 @@
-# src/pages/page_component1.py
+"""
+Page du dashboard - Distribution des notes
+"""
+import sys
+from pathlib import Path
+
+# Ajouter le projet au path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
 
 from dash import Dash, html, dcc
-from src.components.component1 import create_distribution_plot  # ton composant existant
 
-# Création de l'app Dash
+# Import du composant - IMPORTANT: avec src.
+from src.components.component1 import create_distribution_plot
+
+# Créer l'application
 app = Dash(__name__)
 
-# On génère le graphique à partir du composant
-fig = create_distribution_plot()
-
-# Définition de la page Dash
+# Définir le layout
 app.layout = html.Div([
     html.H1(
-        "Distribution des Notes d'Égalité Professionnelle",
-        style={"textAlign": "center", "color": "#0074D9"}
+        "📊 Distribution des Notes d'Égalité Professionnelle", 
+        style={'textAlign': 'center', 'color': '#7FDBFF', 'marginTop': '20px'}
     ),
-    html.P(
-        "Cette page montre la répartition des notes obtenues par les entreprises dans chaque catégorie.",
-        style={"textAlign": "center"}
-    ),
-    dcc.Graph(
-        id="distribution-graph",
-        figure=fig
-    )
+    html.Div([
+        dcc.Graph(
+            id='distribution-plot',
+            figure=create_distribution_plot()
+        )
+    ], style={'padding': '20px'})
 ])
 
-# Lancement de l'application Dash
-if __name__ == "__main__":
-    app.run(debug=True, port=8051)
+# Lancer le serveur
+if __name__ == '__main__':
+    print("\n" + "="*60)
+    print("🚀 Lancement du Dashboard")
+    print("="*60)
+    print("🌐 Ouvrez votre navigateur sur : http://127.0.0.1:8050/")
+    print("⌨️  Appuyez sur Ctrl+C pour arrêter")
+    print("="*60 + "\n")
+    
+    app.run(debug=True, port=8050)

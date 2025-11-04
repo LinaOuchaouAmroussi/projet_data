@@ -1,5 +1,8 @@
+"""
+Composant 2 : Notes moyennes par taille d'entreprise
+"""
 import plotly.express as px
-from . import df, NOTE_COLUMNS, SIZE_COLUMN
+from src.components import df, NOTE_COLUMNS, SIZE_COLUMN
 
 def create_size_distribution_plot():
     """Crée le graphique des notes moyennes par taille d'entreprise"""

@@ -1,5 +1,5 @@
 import plotly.graph_objects as go
-from . import df
+from src.components import df
 
 def create_summary_stats():
     """Crée un résumé statistique des données"""
@@ -13,8 +13,16 @@ def create_summary_stats():
 
 def create_stats_table():
     """Crée une visualisation HTML des statistiques sous forme de tableau"""
-    stats = create_summary_stats()
+    # Create summary statistics
+    stats = {
+        "Note Moyenne Globale": df["note_index"].mean(),
+        "Nombre d'Entreprises": len(df),
+        "Années Couvertes": f"{df['année'].min()} - {df['année'].max()}",
+        "Note Maximale": df["note_index"].max(),
+        "Note Minimale": df["note_index"].min()
+    }
     
+    # Create table figure
     fig = go.Figure(data=[go.Table(
         header=dict(
             values=['Indicateur', 'Valeur'],
@@ -35,15 +43,15 @@ def create_stats_table():
         )
     )])
     
+    # Update layout for consistent style
     fig.update_layout(
+        height=300,
+        width=800,
         title=dict(
             text="Tableau de Bord - Statistiques Clés",
             x=0.5,
-            y=0.95,
-            font=dict(size=24)
+            font=dict(size=20)
         ),
-        width=800,
-        height=400,
         margin=dict(t=100, b=50, l=50, r=50),
         paper_bgcolor='white'
     )
