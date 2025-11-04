@@ -1,5 +1,5 @@
 import plotly.express as px
-from components import df, NOTE_COLUMNS, SIZE_COLUMN
+from . import df, NOTE_COLUMNS, SIZE_COLUMN
 
 def create_size_distribution_plot():
     """Crée le graphique des notes moyennes par taille d'entreprise"""

@@ -1,6 +1,7 @@
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from components import df, NOTE_COLUMNS
+#from components import df, NOTE_COLUMNS
+from . import df, NOTE_COLUMNS
 
 def create_distribution_plot():
     """Crée le graphique de distribution des notes"""

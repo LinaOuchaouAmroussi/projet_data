@@ -1,5 +1,5 @@
 import plotly.express as px
-from components import df, YEAR_COLUMN, REGION_COLUMN
+from . import df, YEAR_COLUMN, REGION_COLUMN
 
 def create_temporal_evolution_plot():
     """

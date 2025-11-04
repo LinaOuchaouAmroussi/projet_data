@@ -1,5 +1,5 @@
 import plotly.express as px
-from components import df, YEAR_COLUMN, SIZE_COLUMN
+from . import df, YEAR_COLUMN, SIZE_COLUMN
 
 def create_size_evolution_plot():
     """
