@@ -46,6 +46,29 @@ app.layout = html.Div([
     
 ])
 
+@app.callback(Output("page-content", "children"), Input("url", "pathname"))
+def display_page(path):
+    if path == "/page1":
+        from page_component1 import app as page
+        return page.layout
+    elif path == "/page2":
+        from page_component2 import app as page
+        return page.layout
+    elif path == "/page3":
+        from page_component3 import app as page
+        return page.layout
+    elif path == "/page4":
+        from page_component4 import app as page
+        return page.layout
+    elif path == "/page5":
+        from page_component5 import app as page
+        return page.layout
+    return html.H1("Bienvenue sur le Dashboard 👋", style={"textAlign": "center", "marginTop": "50px"})
+
+@app.callback(Output("url", "pathname"), Input("page-selector", "value"))
+def navigate(value):
+    return value if value else "/"
+
 # Lancement du serveur
 if __name__ == '__main__':
     print("\n" + "="*70)

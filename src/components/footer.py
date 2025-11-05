@@ -10,7 +10,7 @@ def create_footer():
                 html.H4("Auteurs", style={'color': "#0B0E4E"}),
                 html.Ul([
                     html.Li("OUCHAOU Lina"),
-                    html.Li("TORRES Diego"),
+                    html.Li("POGEANT Justine"),
                 ], style={'listStyleType': 'none'})
             ], style={'margin': '20px'}),
             
@@ -26,7 +26,7 @@ def create_footer():
             # Section des informations du projet
             html.Div([
                 html.H4("À Propos", style={'color': '#7FDBFF'}),
-                html.P("Dashboard créé dans le cadre du projet Python 2023-2024"),
+                html.P("Dashboard créé dans le cadre du projet Python 2025"),
                 html.P("Données sources : Index Égalité Professionnelle")
             ], style={'margin': '20px'})
             
