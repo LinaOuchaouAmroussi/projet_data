@@ -49,10 +49,10 @@ app.layout = html.Div([
 # Lancement du serveur
 if __name__ == '__main__':
     print("\n" + "="*70)
-    print("🚀 DASHBOARD ÉGALITÉ PROFESSIONNELLE")
+    print("DASHBOARD ÉGALITÉ PROFESSIONNELLE")
     print("="*70)
-    print("🌐 Ouvrez votre navigateur sur : http://127.0.0.1:8051/")
-    print("⌨️  Appuyez sur Ctrl+C pour arrêter le serveur")
+    print("Ouvrez votre navigateur sur : http://127.0.0.1:8051/")
+    print("Appuyez sur Ctrl+C pour arrêter le serveur")
     print("="*70 + "\n")
     
     app.run(debug=True, port=8051)
