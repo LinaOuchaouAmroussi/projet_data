@@ -57,10 +57,10 @@ def toggle_dropdown(n_clicks, current_style):
     """
     if n_clicks and n_clicks % 2 == 1:  # Menu ouvert
         current_style['display'] = 'block'
-        button_text = "📊 Pages ▲"
+        button_text = "Pages ▲"
     else:  # Menu fermé
         current_style['display'] = 'none'
-        button_text = "📊 Pages ▼"
+        button_text = "Pages ▼"
     
     return current_style, button_text
 
