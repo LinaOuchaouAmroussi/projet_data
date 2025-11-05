@@ -35,9 +35,9 @@ if __name__ == '__main__':
     print("\n" + "="*60)
     print("🚀 Lancement du Dashboard")
     print("="*60)
-    print("🌐 Ouvrez votre navigateur sur : http://127.0.0.1:8056/")
+    print("🌐 Ouvrez votre navigateur sur : http://127.0.0.1:8055/")
     print("⌨️  Appuyez sur Ctrl+C pour arrêter")
     print("="*60 + "\n")
     
-    app.run(debug=True, port=8056)
+    app.run(debug=True, port=8055)
 
