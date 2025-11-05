@@ -3,22 +3,42 @@ Page du dashboard - Statistiques clés
 """
 import sys
 from pathlib import Path
+import dash
+from dash import html, dcc
 
 # Ajouter le projet au path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from dash import Dash, html, dcc
 from src.components.component5 import create_stats_table
 
-# Créer l'application
-app = Dash(__name__)
+# Enregistrer cette page
+dash.register_page(
+    __name__,
+    path='/component5',
+    name='🧮 Statistiques Clés'
+)
 
 # Définir le layout
-app.layout = html.Div([
-    
+layout = html.Div([
+
     html.Div([
-        
+
+        # Bouton retour
+        html.Div([
+            dcc.Link(
+                '← Retour à l\'accueil',
+                href='/',
+                style={
+                    'textDecoration': 'none',
+                    'color': '#1f4788',
+                    'fontSize': '16px',
+                    'fontWeight': '500',
+                    'fontFamily': 'Arial, sans-serif'
+                }
+            )
+        ], style={'marginBottom': '20px'}),
+
         # Titre
         html.H1(
             "🧮 Statistiques Clés d'Égalité Professionnelle",
@@ -55,14 +75,3 @@ app.layout = html.Div([
     'minHeight': '100vh',
     'fontFamily': 'Arial, sans-serif'
 })
-
-# Lancer le serveur
-if __name__ == '__main__':
-    print("\n" + "="*60)
-    print("🚀 Lancement du Dashboard - Component 5")
-    print("="*60)
-    print("🌐 Ouvrez votre navigateur sur : http://127.0.0.1:8055/")
-    print("⌨️  Appuyez sur Ctrl+C pour arrêter")
-    print("="*60 + "\n")
-    
-    app.run(debug=True, port=8055)

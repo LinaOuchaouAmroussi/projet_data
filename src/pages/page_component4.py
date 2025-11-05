@@ -3,28 +3,48 @@ Page du dashboard - Évolution des notes par taille d'entreprise
 """
 import sys
 from pathlib import Path
+import dash
+from dash import html, dcc
 
-# Ajouter le projet au path
 # Ajouter le projet au path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-from dash import Dash, html, dcc
 from src.components.component4 import create_size_evolution_plot
 
-# Créer l'application
-app = Dash(__name__)
+# Enregistrer cette page
+dash.register_page(
+    __name__,
+    path='/component4',
+    name='📊 Évolution par Taille'
+)
 
 # Définir le layout avec le graphique centré
-app.layout = html.Div([
+layout = html.Div([
     # Container principal centré
     html.Div([
+
+        # Bouton retour
+        html.Div([
+            dcc.Link(
+                '← Retour à l\'accueil',
+                href='/',
+                style={
+                    'textDecoration': 'none',
+                    'color': '#1f4788',
+                    'fontSize': '16px',
+                    'fontWeight': '500',
+                    'fontFamily': 'Arial, sans-serif'
+                }
+            )
+        ], style={'marginBottom': '20px'}),
+
         # Titre
         html.H1(
             "📊 Évolution des Notes par Taille d'Entreprise",
             style={
                 'textAlign': 'center',
-                'color': '#1f4788',  # Bleu foncé
+                'color': '#1f4788',
                 'marginTop': '30px',
                 'marginBottom': '10px',
                 'fontFamily': 'Arial, sans-serif',
@@ -32,7 +52,7 @@ app.layout = html.Div([
                 'fontWeight': 'bold'
             }
         ),
-        
+
         # Sous-titre
         html.P(
             "Animation de l'évolution des notes moyennes au fil des années",
@@ -44,7 +64,7 @@ app.layout = html.Div([
                 'fontFamily': 'Arial, sans-serif'
             }
         ),
-        
+
         # Instructions
         html.P(
             "💡 Cliquez sur ▶️ pour lancer l'animation",
@@ -57,14 +77,14 @@ app.layout = html.Div([
                 'fontFamily': 'Arial, sans-serif'
             }
         ),
-        
+
         # Container du graphique centré
         html.Div([
             dcc.Graph(
                 id='evolution-size-graph',
                 figure=create_size_evolution_plot(),
                 style={
-                    'margin': '0 auto'  # Centre le graphique
+                    'margin': '0 auto'
                 }
             )
         ], style={
@@ -73,27 +93,16 @@ app.layout = html.Div([
             'alignItems': 'center',
             'padding': '20px'
         })
-        
+
     ], style={
         'maxWidth': '1200px',
         'margin': '0 auto',
         'padding': '20px',
         'fontFamily': 'Arial, sans-serif'
     })
-    
+
 ], style={
     'backgroundColor': '#f8f9fa',
     'minHeight': '100vh',
     'fontFamily': 'Arial, sans-serif'
 })
-
-# Lancer le serveur
-if __name__ == '__main__':
-    print("\n" + "="*60)
-    print("🚀 Lancement du Dashboard - Component 4")
-    print("="*60)
-    print("🌐 Ouvrez votre navigateur sur : http://127.0.0.1:8054/")
-    print("⌨️  Appuyez sur Ctrl+C pour arrêter")
-    print("="*60 + "\n")
-    
-    app.run(debug=True, port=8054)

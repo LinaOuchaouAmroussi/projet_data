@@ -1,23 +1,45 @@
 """
-Page du dashboard - Carte interactive de l’égalité professionnelle
+Page du dashboard - Carte interactive de l'égalité professionnelle
 """
 import sys
 from pathlib import Path
+import dash
+from dash import html
 
-# --- Ajouter le projet au path (important pour import src) ---
+# Ajouter le projet au path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
 
-# --- Imports Dash et composant ---
-from dash import Dash, html
-from src.components.component_map import create_map  # fonction qui crée la carte
+from src.components.component_map import create_map
 
-# --- Création de l’application Dash ---
-app = Dash(__name__)
-app.title = "Dashboard Égalité Professionnelle"
+# Enregistrer cette page
+dash.register_page(
+    __name__,
+    path='/map',
+    name='🗺️ Carte Interactive'
+)
 
-# --- Layout ---
-app.layout = html.Div([
+# Layout
+layout = html.Div([
+
+    # Bouton retour
+    html.Div([
+        html.A(
+            '← Retour à l\'accueil',
+            href='/',
+            style={
+                'textDecoration': 'none',
+                'color': '#003366',
+                'fontSize': '16px',
+                'fontWeight': '500',
+                'display': 'inline-block',
+                'marginBottom': '20px',
+                'marginLeft': '20px',
+                'marginTop': '20px'
+            }
+        )
+    ]),
+
     html.H1(
         "🗺️ Carte de l'égalité professionnelle par département",
         style={'textAlign': 'center', 'color': '#003366', 'marginTop': '20px'}
@@ -28,7 +50,7 @@ app.layout = html.Div([
         children=[
             html.Iframe(
                 id='map',
-                srcDoc=create_map(),  # on appelle la fonction importée
+                srcDoc=create_map(),
                 width='100%',
                 height='650'
             )
@@ -41,18 +63,7 @@ app.layout = html.Div([
     ),
 
     html.Div(
-        "Cette carte affiche la note moyenne d’égalité professionnelle par département.",
+        "Cette carte affiche la note moyenne d'égalité professionnelle par département.",
         style={'textAlign': 'center', 'marginTop': '20px', 'fontSize': '18px'}
     )
 ])
-
-# --- Lancement ---
-if __name__ == '__main__':
-    print("\n" + "="*60)
-    print("🚀 Lancement du Dashboard")
-    print("="*60)
-    print("🌐 Ouvrez votre navigateur sur : http://127.0.0.1:8056/")
-    print("⌨️  Appuyez sur Ctrl+C pour arrêter")
-    print("="*60 + "\n")
-
-    app.run(debug=True, port=8056)
