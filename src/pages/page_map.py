@@ -1,5 +1,16 @@
+"""
+Page du dashboard - Carte interactive de l’égalité professionnelle
+"""
+import sys
+from pathlib import Path
+
+# --- Ajouter le projet au path (important pour import src) ---
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+
+# --- Imports Dash et composant ---
 from dash import Dash, html
-from src.components.component_map import create_map  # <-- on importe la fonction
+from src.components.component_map import create_map  # fonction qui crée la carte
 
 # --- Création de l’application Dash ---
 app = Dash(__name__)
@@ -9,7 +20,7 @@ app.title = "Dashboard Égalité Professionnelle"
 app.layout = html.Div([
     html.H1(
         "🗺️ Carte de l'égalité professionnelle par département",
-        style={'textAlign': 'center', 'color': '#003366'}
+        style={'textAlign': 'center', 'color': '#003366', 'marginTop': '20px'}
     ),
 
     html.Div(
@@ -17,7 +28,7 @@ app.layout = html.Div([
         children=[
             html.Iframe(
                 id='map',
-                srcDoc=create_map(),   # on appelle la fonction importée
+                srcDoc=create_map(),  # on appelle la fonction importée
                 width='100%',
                 height='650'
             )
@@ -36,5 +47,12 @@ app.layout = html.Div([
 ])
 
 # --- Lancement ---
-if __name__ == "__main__":
+if __name__ == '__main__':
+    print("\n" + "="*60)
+    print("🚀 Lancement du Dashboard")
+    print("="*60)
+    print("🌐 Ouvrez votre navigateur sur : http://127.0.0.1:8056/")
+    print("⌨️  Appuyez sur Ctrl+C pour arrêter")
+    print("="*60 + "\n")
+
     app.run(debug=True, port=8056)
