@@ -16,25 +16,75 @@ app = Dash(__name__)
 
 # Définir le layout
 app.layout = html.Div([
-    html.H1(
-        "📈 Évolution Temporelle des Notes d'Égalité Professionnelle",
-        style={'textAlign': 'center', 'color': '#FF6B6B', 'marginTop': '20px'}
-    ),
-    html.P(
-        "Animation de l'évolution des notes par année et par région",
-        style={'textAlign': 'center', 'fontSize': '18px', 'color': '#666', 'marginBottom': '10px'}
-    ),
-    html.P(
-        "💡 Cliquez sur ▶️ pour lancer l'animation",
-        style={'textAlign': 'center', 'fontSize': '14px', 'color': '#999', 'fontStyle': 'italic', 'marginBottom': '30px'}
-    ),
+
+    # Container principal centré
     html.Div([
-        dcc.Graph(
-            id='temporal-evolution-graph',
-            figure=create_temporal_evolution_plot()
-        )
-    ], style={'padding': '20px'})
-])
+
+        # Titre
+        html.H1(
+            "📈 Évolution Temporelle des Notes d'Égalité Professionnelle",
+            style={
+                'textAlign': 'center',
+                'color': '#1f4788',
+                'marginTop': '30px',
+                'marginBottom': '10px',
+                'fontFamily': 'Arial, sans-serif',
+                'fontSize': '32px',
+                'fontWeight': 'bold'
+            }
+        ),
+
+        # Sous-titre
+        html.P(
+            "Animation de l'évolution des notes par année et par région.",
+            style={
+                'textAlign': 'center',
+                'fontSize': '18px',
+                'color': '#2c3e50',
+                'marginBottom': '10px',
+                'fontFamily': 'Arial, sans-serif'
+            }
+        ),
+
+        # Instruction
+        html.P(
+            "💡 Cliquez sur ▶️ pour lancer l'animation",
+            style={
+                'textAlign': 'center',
+                'fontSize': '14px',
+                'color': '#7f8c8d',
+                'fontStyle': 'italic',
+                'marginBottom': '40px',
+                'fontFamily': 'Arial, sans-serif'
+            }
+        ),
+
+        # Graphique centré
+        html.Div([
+            dcc.Graph(
+                id='temporal-evolution-graph',
+                figure=create_temporal_evolution_plot(),
+                style={'margin': '0 auto'}
+            )
+        ], style={
+            'display': 'flex',
+            'justifyContent': 'center',
+            'alignItems': 'center',
+            'padding': '20px'
+        })
+
+    ], style={
+        'maxWidth': '1200px',
+        'margin': '0 auto',
+        'padding': '20px',
+        'fontFamily': 'Arial, sans-serif'
+    })
+
+], style={
+    'backgroundColor': '#f8f9fa',
+    'minHeight': '100vh',
+    'fontFamily': 'Arial, sans-serif'
+})
 
 # Lancer le serveur
 if __name__ == '__main__':
@@ -44,5 +94,5 @@ if __name__ == '__main__':
     print("🌐 Ouvrez votre navigateur sur : http://127.0.0.1:8053/")
     print("⌨️  Appuyez sur Ctrl+C pour arrêter")
     print("="*60 + "\n")
-    
+
     app.run(debug=True, port=8053)

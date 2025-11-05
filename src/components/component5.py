@@ -13,7 +13,7 @@ def create_summary_stats():
 
 def create_stats_table():
     """Crée une visualisation HTML des statistiques sous forme de tableau"""
-    # Create summary statistics
+
     stats = {
         "Note Moyenne Globale": df["note_index"].mean(),
         "Nombre d'Entreprises": len(df),
@@ -21,39 +21,33 @@ def create_stats_table():
         "Note Maximale": df["note_index"].max(),
         "Note Minimale": df["note_index"].min()
     }
-    
-    # Create table figure
+
     fig = go.Figure(data=[go.Table(
         header=dict(
             values=['Indicateur', 'Valeur'],
-            fill_color='#2874A6',
-            align='left',
+            fill_color='#1f4788',
+            align='center',
             font=dict(color='white', size=16),
-            height=40
+            height=45
         ),
         cells=dict(
             values=[
                 list(stats.keys()),
                 [f"{v:.2f}" if isinstance(v, (int, float)) else str(v) for v in stats.values()]
             ],
-            fill_color='#EBF5FB',
-            align='left',
+            fill_color=[['#f2f2f2', 'white'] * 5],  # bandes zébrées élégantes
+            align='center',
             font=dict(color='black', size=14),
-            height=35
+            height=38
         )
     )])
-    
-    # Update layout for consistent style
+
+    # ✅ Taille auto sans scroll
     fig.update_layout(
-        height=300,
-        width=800,
-        title=dict(
-            text="Tableau de Bord - Statistiques Clés",
-            x=0.5,
-            font=dict(size=20)
-        ),
-        margin=dict(t=100, b=50, l=50, r=50),
+        height = 450,   # assez grand pour afficher toutes les lignes
+        width = None,   # largeur automatique : prend toute la page
+        margin=dict(t=40, b=30, l=20, r=20),
         paper_bgcolor='white'
     )
-    
+
     return fig

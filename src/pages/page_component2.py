@@ -16,21 +16,62 @@ app = Dash(__name__)
 
 # Définir le layout
 app.layout = html.Div([
-    html.H1(
-        "📊 Note Moyenne d'Égalité Professionnelle par Taille d'Entreprise",
-        style={'textAlign': 'center', 'color': '#0074D9', 'marginTop': '20px'}
-    ),
-    html.P(
-        "Cette page montre la note moyenne globale par tranche de taille d'entreprise.",
-        style={'textAlign': 'center', 'fontSize': '18px', 'color': '#666', 'marginBottom': '30px'}
-    ),
+    
+    # Container principal centré
     html.Div([
-        dcc.Graph(
-            id='size-distribution-graph',
-            figure=create_size_distribution_plot()
-        )
-    ], style={'padding': '20px'})
-])
+
+        # Titre
+        html.H1(
+            "📊 Note Moyenne d'Égalité Professionnelle par Taille d'Entreprise",
+            style={
+                'textAlign': 'center',
+                'color': '#1f4788',
+                'marginTop': '30px',
+                'marginBottom': '10px',
+                'fontFamily': 'Arial, sans-serif',
+                'fontSize': '32px',
+                'fontWeight': 'bold'
+            }
+        ),
+
+        # Sous-titre
+        html.P(
+            "Comparaison des moyennes obtenues selon la taille des entreprises.",
+            style={
+                'textAlign': 'center',
+                'fontSize': '18px',
+                'color': '#2c3e50',
+                'marginBottom': '40px',
+                'fontFamily': 'Arial, sans-serif'
+            }
+        ),
+
+        # Graphique centré
+        html.Div([
+            dcc.Graph(
+                id='size-distribution-graph',
+                figure=create_size_distribution_plot(),
+                style={'margin': '0 auto'}
+            )
+        ], style={
+            'display': 'flex',
+            'justifyContent': 'center',
+            'alignItems': 'center',
+            'padding': '20px'
+        })
+
+    ], style={
+        'maxWidth': '1200px',
+        'margin': '0 auto',
+        'padding': '20px',
+        'fontFamily': 'Arial, sans-serif'
+    })
+
+], style={
+    'backgroundColor': '#f8f9fa',
+    'minHeight': '100vh',
+    'fontFamily': 'Arial, sans-serif'
+})
 
 # Lancer le serveur
 if __name__ == '__main__':
