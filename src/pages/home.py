@@ -22,7 +22,8 @@ layout = html.Div([
             'textAlign': 'center',
             'color': '#2c3e50',
             'marginTop': '30px',
-            'marginBottom': '10px'
+            'marginBottom': '10px',
+            'fontFamily': 'Arial, sans-serif'
         }
     ),
     html.H1(
@@ -31,7 +32,8 @@ layout = html.Div([
             'textAlign': 'center',
             'color': '#2c3e50',
             'marginTop': '10px',
-            'marginBottom': '20px'
+            'marginBottom': '20px',
+            'fontFamily': 'Arial, sans-serif'
         }
     ),
     # Sous-titre
@@ -43,7 +45,8 @@ layout = html.Div([
             'textAlign': 'center',
             'fontSize': '1.2rem',
             'color': '#7f8c8d',
-            'marginBottom': '50px'
+            'marginBottom': '50px',
+            'fontFamily': 'Arial, sans-serif'
         }
     ),
     # Sous-titre
@@ -53,7 +56,8 @@ layout = html.Div([
             'textAlign': 'center',
             'fontSize': '1.2rem',
             'color': '#7f8c8d',
-            'marginBottom': '20px'
+            'marginBottom': '20px',
+            'fontFamily': 'Arial, sans-serif'
         }
     ),
     
@@ -75,6 +79,7 @@ layout = html.Div([
             'borderRadius': '10px',
             'boxShadow': '0 4px 6px rgba(0,0,0,0.1)',
             'cursor': 'pointer',
+            'fontFamily': 'Arial, sans-serif',
             'transition': 'transform 0.3s'
         }),
         
@@ -93,6 +98,7 @@ layout = html.Div([
             'borderRadius': '10px',
             'boxShadow': '0 4px 6px rgba(0,0,0,0.1)',
             'cursor': 'pointer',
+            'fontFamily': 'Arial, sans-serif',
             'transition': 'transform 0.3s'
         }),
 
@@ -111,6 +117,7 @@ layout = html.Div([
             'borderRadius': '10px',
             'boxShadow': '0 4px 6px rgba(0,0,0,0.1)',
             'cursor': 'pointer',
+            'fontFamily': 'Arial, sans-serif',
             'transition': 'transform 0.3s'
         }),
         
@@ -129,6 +136,7 @@ layout = html.Div([
             'borderRadius': '10px',
             'boxShadow': '0 4px 6px rgba(0,0,0,0.1)',
             'cursor': 'pointer',
+            'fontFamily': 'Arial, sans-serif',
             'transition': 'transform 0.3s'
         }),
         
@@ -147,6 +155,7 @@ layout = html.Div([
             'borderRadius': '10px',
             'boxShadow': '0 4px 6px rgba(0,0,0,0.1)',
             'cursor': 'pointer',
+            'fontFamily': 'Arial, sans-serif',
             'transition': 'transform 0.3s'
         }),
 
@@ -165,6 +174,7 @@ layout = html.Div([
             'borderRadius': '10px',
             'boxShadow': '0 4px 6px rgba(0,0,0,0.1)',
             'cursor': 'pointer',
+            'fontFamily': 'Arial, sans-serif',
             'transition': 'transform 0.3s'
         }),
         
@@ -174,6 +184,7 @@ layout = html.Div([
         'gap': '30px',
         'maxWidth': '1200px',
         'margin': '0 auto',
+        'fontFamily': 'Arial, sans-serif',
         'padding': '20px'
     })
 ])
