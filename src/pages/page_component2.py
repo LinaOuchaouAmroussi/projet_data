@@ -16,7 +16,7 @@ from src.components.component2 import create_size_distribution_plot
 dash.register_page(
     __name__,
     path='/component2',
-    name='📊 Notes par Taille'
+    name=' Notes par Taille'
 )
 
 # Définir le layout
@@ -42,7 +42,7 @@ layout = html.Div([
 
         # Titre
         html.H1(
-            "📊 Note Moyenne d'Égalité Professionnelle par Taille d'Entreprise",
+            " Note Moyenne d'Égalité Professionnelle par Taille d'Entreprise",
             style={
                 'textAlign': 'center',
                 'color': '#1f4788',

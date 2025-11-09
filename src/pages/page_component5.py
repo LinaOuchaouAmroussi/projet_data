@@ -16,7 +16,7 @@ from src.components.component5 import create_stats_table
 dash.register_page(
     __name__,
     path='/component5',
-    name='🧮 Statistiques Clés'
+    name=' Statistiques Clés'
 )
 
 # Définir le layout
@@ -41,7 +41,7 @@ layout = html.Div([
 
         # Titre
         html.H1(
-            "🧮 Statistiques Clés d'Égalité Professionnelle",
+            " Statistiques Clés d'Égalité Professionnelle",
             style={
                 'textAlign': 'center',
                 'color': '#1f4788',

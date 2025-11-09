@@ -17,15 +17,35 @@ layout = html.Div([
     
     # Titre principal
     html.H1(
-        "Tableau de Bord - Égalité Professionnelle",
+        "Tableau de Bord",
         style={
             'textAlign': 'center',
             'color': '#2c3e50',
             'marginTop': '30px',
+            'marginBottom': '10px'
+        }
+    ),
+    html.H1(
+        "Égalité Professionnelle dans les entreprises françaises de 50 salariés ou plus",
+        style={
+            'textAlign': 'center',
+            'color': '#2c3e50',
+            'marginTop': '10px',
             'marginBottom': '20px'
         }
     ),
-    
+    # Sous-titre
+    html.P(
+        "\nLe jeu de données « Index Égalité Professionnelle F/H » rassemble les scores attribués chaque année aux entreprises françaises de 50 salariés ou plus, en fonction de leur niveau d’égalité entre les femmes et les hommes. " \
+        "Cet index, noté sur 100 points, mesure notamment les écarts de rémunération, les augmentations, les promotions, les retours de congé maternité et la présence équilibrée de femmes et d’hommes parmi les plus hautes rémunérations. " \
+        "Il permet ainsi de suivre les progrès réalisés par les entreprises et d’identifier celles qui doivent mettre en place des actions correctives pour améliorer l’égalité professionnelle.",
+        style={
+            'textAlign': 'center',
+            'fontSize': '1.2rem',
+            'color': '#7f8c8d',
+            'marginBottom': '50px'
+        }
+    ),
     # Sous-titre
     html.P(
         "Sélectionnez une analyse pour explorer les données",
@@ -33,7 +53,7 @@ layout = html.Div([
             'textAlign': 'center',
             'fontSize': '1.2rem',
             'color': '#7f8c8d',
-            'marginBottom': '50px'
+            'marginBottom': '20px'
         }
     ),
     

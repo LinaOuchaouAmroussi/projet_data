@@ -16,7 +16,7 @@ from src.components.component4 import create_size_evolution_plot
 dash.register_page(
     __name__,
     path='/component4',
-    name='📊 Évolution par Taille'
+    name=' Évolution par Taille'
 )
 
 # Définir le layout avec le graphique centré
@@ -41,7 +41,7 @@ layout = html.Div([
 
         # Titre
         html.H1(
-            "📊 Évolution des Notes par Taille d'Entreprise",
+            " Évolution des Notes par Taille d'Entreprise",
             style={
                 'textAlign': 'center',
                 'color': '#1f4788',
@@ -67,7 +67,7 @@ layout = html.Div([
 
         # Instructions
         html.P(
-            "💡 Cliquez sur ▶️ pour lancer l'animation",
+            " Cliquez sur ▶️ pour lancer l'animation",
             style={
                 'textAlign': 'center',
                 'fontSize': '14px',

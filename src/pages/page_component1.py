@@ -16,7 +16,7 @@ from src.components.component1 import create_distribution_plot
 dash.register_page(
     __name__,
     path='/component1',
-    name='📊 Distribution des Notes'
+    name=' Distribution des Notes'
 )
 
 # Définir le layout
@@ -42,7 +42,7 @@ layout = html.Div([
 
         # Titre
         html.H1(
-            "📊 Distribution des Notes d'Égalité Professionnelle", 
+            " Distribution des Notes d'Égalité Professionnelle", 
             style={
                 'textAlign': 'center',
                 'color': '#1f4788',  

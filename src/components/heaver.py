@@ -21,7 +21,8 @@ def create_header():
                         'color': 'white',
                         'textDecoration': 'none',
                         'fontSize': '24px',
-                        'fontWeight': 'bold'
+                        'fontWeight': 'bold',
+                        'fontFamily': 'Arial, sans-serif'
                     }
                 )
             ], style={'flex': '1'}),
@@ -31,7 +32,7 @@ def create_header():
                 
                 # Bouton pour ouvrir le menu
                 html.Button(
-                    "📊 Pages ▼",
+                    " Accéder aux autres pages ▼",
                     id="menu-button",
                     n_clicks=0,
                     style={
@@ -42,6 +43,7 @@ def create_header():
                         'padding': '10px 20px',
                         'fontSize': '16px',
                         'fontWeight': 'bold',
+                        'fontFamily': 'Arial, sans-serif',
                         'cursor': 'pointer',
                         'transition': 'all 0.3s ease'
                     }
@@ -51,7 +53,7 @@ def create_header():
                 html.Div([
                     
                     dcc.Link(
-                        "📊 Distribution des Notes",
+                        " Distribution des Notes",
                         href="/component1",
                         className="dropdown-item"
                     ),
@@ -59,7 +61,7 @@ def create_header():
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
                     
                     dcc.Link(
-                        "📊 Notes par Taille d'Entreprise",
+                        " Notes par Taille d'Entreprise",
                         href="/component2",
                         className="dropdown-item"
                     ),
@@ -67,7 +69,7 @@ def create_header():
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
                     
                     dcc.Link(
-                        "📈 Évolution Temporelle",
+                        " Évolution Temporelle",
                         href="/component3",
                         className="dropdown-item"
                     ),
@@ -75,7 +77,7 @@ def create_header():
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
                     
                     dcc.Link(
-                        "📊 Évolution par Taille",
+                        " Évolution par Taille",
                         href="/component4",
                         className="dropdown-item"
                     ),
@@ -83,7 +85,7 @@ def create_header():
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
                     
                     dcc.Link(
-                        "🧮 Statistiques Clés",
+                        " Statistiques Clés",
                         href="/component5",
                         className="dropdown-item"
                     ),
@@ -91,12 +93,14 @@ def create_header():
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
                     
                     dcc.Link(
-                        "🗺️ Carte Interactive",
+                        " Carte Interactive",
                         href="/map",
                         className="dropdown-item"
                     )
                     
                 ], id="dropdown-menu", style={
+                    'fontFamily': 'Arial, sans-serif',
+                    'textAlign': 'center',
                     'display': 'none',  # Caché par défaut
                     'position': 'absolute',
                     'top': '100%',

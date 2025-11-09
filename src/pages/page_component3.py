@@ -16,7 +16,7 @@ from src.components.component3 import create_temporal_evolution_plot
 dash.register_page(
     __name__,
     path='/component3',
-    name='📈 Évolution Temporelle'
+    name=' Évolution Temporelle'
 )
 
 # Définir le layout
@@ -42,7 +42,7 @@ layout = html.Div([
 
         # Titre
         html.H1(
-            "📈 Évolution Temporelle des Notes d'Égalité Professionnelle",
+            " Évolution Temporelle des Notes d'Égalité Professionnelle",
             style={
                 'textAlign': 'center',
                 'color': '#1f4788',
@@ -68,7 +68,7 @@ layout = html.Div([
 
         # Instruction
         html.P(
-            "💡 Cliquez sur ▶️ pour lancer l'animation",
+            " Cliquez sur ▶️ pour lancer l'animation",
             style={
                 'textAlign': 'center',
                 'fontSize': '14px',

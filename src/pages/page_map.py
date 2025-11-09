@@ -16,7 +16,7 @@ from src.components.component_map import create_map
 dash.register_page(
     __name__,
     path='/map',
-    name='🗺️ Carte Interactive'
+    name=' Carte Interactive'
 )
 
 # Layout
@@ -41,8 +41,11 @@ layout = html.Div([
     ]),
 
     html.H1(
-        "🗺️ Carte de l'égalité professionnelle par département",
-        style={'textAlign': 'center', 'color': '#003366', 'marginTop': '20px'}
+        " Carte de l'égalité professionnelle par département",
+        style={'textAlign': 'center',
+               'color': '#003366',
+               'marginTop': '20px',
+               'fontFamily': 'Arial, sans-serif'}
     ),
 
     html.Div(
@@ -64,6 +67,9 @@ layout = html.Div([
 
     html.Div(
         "Cette carte affiche la note moyenne d'égalité professionnelle par département.",
-        style={'textAlign': 'center', 'marginTop': '20px', 'fontSize': '18px'}
+        style={'textAlign': 'center',
+               'marginTop': '20px', 
+               'fontSize': '18px',
+               'fontFamily': 'Arial, sans-serif'}
     )
 ])
