@@ -64,7 +64,7 @@ def toggle_dropdown(n_clicks, current_style):
     
     return current_style, button_text
 
-# Lancement du serveur
+"""# Lancement du serveur
 if __name__ == '__main__':
     print("\n" + "="*70)
     print("🚀 DASHBOARD ÉGALITÉ PROFESSIONNELLE")
@@ -83,4 +83,4 @@ if __name__ == '__main__':
     print("⌨️  Ctrl+C pour arrêter")
     print("="*70 + "\n")
 
-    app.run(debug=True, port=8051)
+    app.run(debug=True, port=8051)"""

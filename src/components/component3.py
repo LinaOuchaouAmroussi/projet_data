@@ -2,7 +2,8 @@
 Composant 3 : Évolution temporelle animée par région
 """
 import plotly.express as px
-from src.components import df, YEAR_COLUMN, REGION_COLUMN
+"""from src.components import df, YEAR_COLUMN, REGION_COLUMN"""
+from config import df, YEAR_COLUMN, REGION_COLUMN
 
 def create_temporal_evolution_plot():
     """

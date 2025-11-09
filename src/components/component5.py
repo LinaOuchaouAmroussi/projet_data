@@ -1,5 +1,7 @@
 import plotly.graph_objects as go
-from src.components import df
+"""from src.components import df"""
+from config import df
+
 
 def create_summary_stats():
     """Crée un résumé statistique des données"""

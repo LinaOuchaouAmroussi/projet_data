@@ -4,7 +4,8 @@ Composant 1 : Distribution des notes
 """
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from src.components import df, NOTE_COLUMNS
+"""from src.components import df, NOTE_COLUMNS"""
+from config import df, NOTE_COLUMNS   # ✅ import direct du config global
 
 def create_distribution_plot():
     """Creates the distribution plot for all notes"""

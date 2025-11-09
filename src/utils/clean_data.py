@@ -1,8 +1,10 @@
 # src/utils/clean_data.py
 import os
 import pandas as pd
+from config import RAW_DIR, CLEAN_DIR, DATA_RAW_PATH, DATA_CLEAN_PATH
 
-# Chemin absolu vers le dossier projet_data
+
+"""# Chemin absolu vers le dossier projet_data
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Chemins d'accès à partir du dossier projet_data
@@ -10,7 +12,7 @@ RAW_DIR = os.path.join(PROJECT_DIR, "data", "raw")
 CLEAN_DIR = os.path.join(PROJECT_DIR, "data", "cleaned")
 
 RAW_FILE = os.path.join(RAW_DIR, "rawdata.csv")
-CLEAN_FILE = os.path.join(CLEAN_DIR, "cleaneddata.csv")
+CLEAN_FILE = os.path.join(CLEAN_DIR, "cleaneddata.csv")"""
 
 def clean_data():
     """Nettoie les données CSV et les enregistre dans data/cleaned/"""

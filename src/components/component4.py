@@ -1,5 +1,6 @@
 import plotly.express as px
-from src.components import df, YEAR_COLUMN, SIZE_COLUMN
+"""from src.components import df, YEAR_COLUMN, SIZE_COLUMN"""
+from config import df, YEAR_COLUMN, SIZE_COLUMN
 
 def create_size_evolution_plot():
     """Creates the animated evolution plot by company size"""

@@ -3,12 +3,19 @@ import pandas as pd
 import geopandas
 import folium
 import io
+import os
+from config import DATA_CLEAN_PATH, RAW_DIR  # ✅ chemins globaux
+
 
 def create_map():
-    """Crée la carte Folium et retourne le code HTML sous forme de texte."""
+    """Crée la carte Folium et retourne le code HTML sous forme de texte.
     # Chargement des données
     data = pd.read_csv("data/cleaned/cleaneddata.csv")
-    france_dpt = geopandas.read_file("data/raw/departements.json")
+    france_dpt = geopandas.read_file("data/raw/departements.json")"""
+    #Crée la carte Folium et retourne le code HTML sous forme de texte
+    data = pd.read_csv(DATA_CLEAN_PATH)
+    france_dpt_path = os.path.join(RAW_DIR, "departements.json")
+    france_dpt = geopandas.read_file(france_dpt_path)
 
     # Nettoyage
     data_filtered = data.dropna(subset=['note_index'])
