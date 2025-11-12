@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+Script principal de lancement du dashboard.
+
+Ce module gère le pipeline complet :
+- Téléchargement des données brutes si nécessaire
+- Nettoyage des données
+- Lancement du serveur Dash
+"""
+
 # main.py
 import os
 from src.utils.get_data import download_excel, convert_to_csv
@@ -6,7 +16,7 @@ from src.app import app
 from config import DATA_RAW_PATH, DATA_CLEAN_PATH, DASHBOARD_PORT, DEBUG_MODE
 
 def prepare_data():
-    """Télécharge et nettoie les données si elles n’existent pas déjà."""
+    """Télécharge et nettoie les données si elles n'existent pas déjà."""
     if not os.path.exists(DATA_CLEAN_PATH):
         print("📥 Données nettoyées introuvables — génération en cours...")
         if not os.path.exists(DATA_RAW_PATH):
@@ -26,3 +36,7 @@ if __name__ == "__main__":
     print(f"🌐 URL : http://127.0.0.1:{DASHBOARD_PORT}/")
     print("="*70 + "\n")
     app.run(debug=DEBUG_MODE, port=DASHBOARD_PORT)
+
+# ------------------------------------------------------------
+# Fin de main.py
+# ------------------------------------------------------------

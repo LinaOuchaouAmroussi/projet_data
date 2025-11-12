@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+Configuration globale du projet Data Dashboard.
+
+Ce module définit les chemins d'accès aux données, charge le DataFrame principal
+et configure les paramètres globaux du dashboard d'égalité professionnelle.
+"""
+
 # ============================================================
 # 📁 config.py — Configuration globale du projet Data Dashboard
 # ============================================================
@@ -30,7 +38,10 @@ try:
     print(f"✅ Données chargées depuis : {DATA_CLEAN_PATH}")
 except FileNotFoundError:
     print(f"⚠️  Fichier nettoyé introuvable à {DATA_CLEAN_PATH}.")
-    print("   Lancez `main.py` pour télécharger/nettoyer les données avant de démarrer le dashboard.")
+    print(
+        "   Lancez `main.py` pour télécharger/nettoyer les données "
+        "avant de démarrer le dashboard."
+    )
     df = pd.DataFrame()  # dataframe vide pour éviter les plantages
 
 # ------------------------------------------------------------
@@ -69,4 +80,6 @@ DEPARTEMENTS_GEOJSON = os.path.join(RAW_DIR, "departements.json")
 # ------------------------------------------------------------
 # from config import df, NOTE_COLUMNS, DATA_CLEAN_PATH
 # from config import DASHBOARD_PORT, DEBUG_MODE
+# ------------------------------------------------------------
+# Fin de config.py
 # ------------------------------------------------------------
