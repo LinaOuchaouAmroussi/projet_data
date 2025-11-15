@@ -1,14 +1,61 @@
-# Python
-*.pyc
-__pycache__/
-
-# Environnement virtuel
+# ==========================
+#   ENVIRONNEMENT VIRTUEL
+# ==========================
+venv/
+.env/
 .venv/
+env/
+ENV/
 
-# Données locales ou volumineuses
-# Ignorer tout le dossier data
+# ==========================
+#           PYTHON
+# ==========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+build/
+dist/
+
+# ==========================
+#         JUPYTER
+# ==========================
+.ipynb_checkpoints/
+jupyter_notebook_config.json
+
+# ==========================
+#           LOGS
+# ==========================
+*.log
+
+# ==========================
+#         BASES SQLite
+# ==========================
+*.sqlite
+*.sqlite3
+*.db
+
+# ==========================
+#       GEO / FIONA / GDAL
+# ==========================
+*.gpkg~
+*.shp~
+*.shx~
+*.dbf~
+*.prj~
+*.cpg~
+*.qpj~
+*.gdb/
+*.gdb.zip
+
+# ==========================
+#       DONNÉES LOCALES / VOLUMINEUSES
+# ==========================
 data/*
-
 # Mais garder les fichiers CSV utiles
 !data/raw/
 !data/outputs/
@@ -17,6 +64,22 @@ data/*
 !data/cleaned/*.csv
 video.mp4
 
-# IDE / éditeurs
+# ==========================
+#         DASH / FRONT-END
+# ==========================
+node_modules/
+package-lock.json
+*.mapbox_token
+cache/
+
+# ==========================
+# TEMP / BACKUP / EDITORS
+# ==========================
+*.tmp
+*.bak
+*.swp
+*.swo
+*.DS_Store
 .vscode/
 .idea/
+
