@@ -56,7 +56,7 @@ def create_footer():
                     html.Li(
                         html.A(
                             "📄 Documentation", 
-                            href="https://www.data.gouv.fr/", 
+                            href="https://www.data.gouv.fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus/", 
                             target="_blank",
                             style={
                                 'color': '#e8eaf6',
@@ -71,7 +71,7 @@ def create_footer():
                     html.Li(
                         html.A(
                             "💻 GitHub", 
-                            href="https://github.com/votre-repo", 
+                            href="https://github.com/LinaOuchaouAmroussi/projet_data.git", 
                             target="_blank",
                             style={
                                 'color': '#e8eaf6',
