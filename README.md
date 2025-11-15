@@ -1,4 +1,4 @@
-# 🏠 Dashboard Égalité Professionnelle
+#  Dashboard Égalité Professionnelle
 
 <div align="center">
 
@@ -13,7 +13,7 @@
 
 ---
 
-## 📋 Table des matières
+##  Table des matières
 
 1. [User Guide](#-user-guide)
 2. [Data](#-data)
@@ -23,7 +23,7 @@
 
 ---
 
-## 🚀 User Guide
+##  User Guide
 
 ### Prérequis
 
@@ -37,7 +37,7 @@
 
 ```bash
 # Avec Git
-git clone https://github.com/votre-username/data_project.git
+git clone https://github.com/LinaOuchaouAmroussi/projet_data.git
 cd data_project
 
 # OU téléchargez et décompressez le fichier ZIP
@@ -84,9 +84,9 @@ python src/utils/get_data.py
 ```
 
 Cette commande :
-- ✅ Télécharge le fichier Excel depuis data.gouv.fr
-- ✅ Le sauvegarde dans `data/raw/rawdata.xlsx`
-- ✅ Le convertit en `data/raw/rawdata.csv`
+-  Télécharge le fichier Excel depuis data.gouv.fr
+-  Le sauvegarde dans `data/raw/rawdata.xlsx`
+-  Le convertit en `data/raw/rawdata.csv`
 
 **Étape 4.2 : Nettoyer et charger dans la base de données**
 
@@ -95,10 +95,10 @@ python src/utils/clean_data.py
 ```
 
 Cette commande :
-- ✅ Lit les données brutes depuis SQLite (table RAW)
-- ✅ Nettoie et normalise les colonnes
-- ✅ Écrit les données propres dans la table CLEAN
-- ✅ Crée le fichier `data/database.db`
+-  Lit les données brutes depuis SQLite (table RAW)
+-  Nettoie et normalise les colonnes
+-  Écrit les données propres dans la table CLEAN
+-  Crée le fichier `data/database.db`
 
 **Note** : La base de données SQLite est créée automatiquement au premier lancement.
 
@@ -108,11 +108,11 @@ Cette commande :
 
 Le fichier `main.py` exécute automatiquement tout le pipeline :
 
-1. ✅ Charge les données brutes (`data/raw/rawdata.csv`)
-2. ✅ Insère dans la table RAW de SQLite
-3. ✅ Nettoie les données
-4. ✅ Insère dans la table CLEAN
-5. ✅ Lance l'application Dash
+1.  Charge les données brutes (`data/raw/rawdata.csv`)
+2.  Insère dans la table RAW de SQLite
+3.  Nettoie les données
+4.  Insère dans la table CLEAN
+5.  Lance l'application Dash
 
 **Commande unique** :
 
@@ -184,7 +184,7 @@ Le fichier `data/database.db` sera créé automatiquement.
 
 ---
 
-## 📊 Data
+##  Data
 
 ### Source des données
 
@@ -228,10 +228,10 @@ Le projet utilise une architecture en **3 étapes** :
 Le projet utilise **SQLite** pour stocker les données, géré par le fichier `db.py`.
 
 **Avantages** :
-- ✅ Pas de serveur à installer
-- ✅ Fichier unique `data/database.db`
-- ✅ Requêtes SQL optimisées
-- ✅ Gestion via SQLAlchemy
+-  Pas de serveur à installer
+-  Fichier unique `data/database.db`
+-  Requêtes SQL optimisées
+-  Gestion via SQLAlchemy
 
 **Tables** :
 - `raw_table` : Données brutes téléchargées
@@ -337,30 +337,30 @@ def _clean_numeric(val):
 
 ---
 
-## 🛠️ Developer Guide
+##  Developer Guide
 
 ### Architecture du projet
 
 ```
 data_project/
 │
-├── main.py                          # 🚀 Point d'entrée principal du dashboard
-├── config.py                        # ⚙️ Configuration globale (DB_URL, chemins)
-├── app.py                            # 🗄️ Application principale avec menu déroulant interactif 
-├── requirements.txt                 # 📦 Dépendances Python
-├── README.md                        # 📖 Documentation
+├── main.py                          #  Point d'entrée principal du dashboard
+├── config.py                        #  Configuration globale (DB_URL, chemins)
+├── app.py                            #  Application principale avec menu déroulant interactif 
+├── requirements.txt                 #  Dépendances Python
+├── README.md                        #  Documentation
 │
-├── data/                            # 💾 Données
+├── data/                            #  Données
 │   ├── cleaned/cleaneddata.csv     # CSV nettoyé (sauvegarde)
 │   ├── raw/
 │   │   ├── rawdata.xlsx            # Excel téléchargé
 │   │   └── rawdata.csv             # CSV brut converti
-│   └── warehouse/database.db                 # 📊 Base SQLite 
+│   └── warehouse/database.db                 #  Base SQLite 
 │
-├── images/                          # 🖼️ Assets
+├── images/                          #  Assets
 │
-└── src/                             # 💻 Code source
-    ├── components/                  # 🧩 Composants réutilisables
+└── src/                             #  Code source
+    ├── components/                  #  Composants réutilisables
     │   ├── __init__.py
     │   ├── config.py               # Config des données et colonnes
     │   ├── component1.py           # Distribution des notes
@@ -383,7 +383,7 @@ data_project/
     │   ├── page_component5.py      # Page tableau statistique
     │   ├── page_map.py             # Page carte interactive
     │
-    └── utils/                       # 🛠️ Utilitaires
+    └── utils/                       #  Utilitaires
         ├── __init__.py
         ├── get_data.py             # Téléchargement et conversion Excel→CSV
         ├── clean_data.py           # Nettoyage et normalisation
@@ -674,7 +674,7 @@ shapely==2.1.2
 
 ---
 
-## 📈 Rapport d'Analyse
+##  Rapport d'Analyse
 
 ### Vue d'ensemble
 
@@ -684,25 +684,25 @@ L'analyse des données de l'Index Égalité Professionnelle (2018-2024) révèle
 
 **Observations principales** :
 
-📊 **Note Index (Note globale)** :
+ **Note Index (Note globale)** :
 - **Concentration élevée** : La majorité des entreprises obtiennent des notes entre **35 et 40 points sur 40**
 - **Pic majeur** : Plus de 80 000 entreprises se situent dans la tranche 39-40
 - **Tendance positive** : Très peu d'entreprises sous 30 points
 - **Interprétation** : La plupart des entreprises respectent globalement l'égalité professionnelle
 
-📊 **Note Écart de Rémunération** :
+ **Note Écart de Rémunération** :
 - **Bipolarisation** : Deux pics majeurs
   - Premier pic : ~40 points (excellente égalité)
   - Second pic : ~25 points (écarts modérés)
 - **Zone critique** : Environ 10 000 entreprises entre 0-15 points
 - **Enjeu majeur** : L'écart de rémunération reste l'indicateur le plus discriminant
 
-📊 **Note Écart Taux d'Augmentation (Hors Promotion)** :
+ **Note Écart Taux d'Augmentation (Hors Promotion)** :
 - **Concentration extrême** : Plus de 90 000 entreprises à 25 points (note maximale)
 - **Excellente performance** : Cet indicateur montre une forte égalité
 - **Rares cas problématiques** : Moins de 5 000 entreprises sous 15 points
 
-📊 **Note Écart Taux de Promotion** :
+ **Note Écart Taux de Promotion** :
 - **Distribution similaire** : Majorité à 30 000 entreprises avec note maximale
 - **Deuxième groupe** : ~20 000 entreprises entre 0-15 points
 - **Progression possible** : Zone d'amélioration identifiée
@@ -713,25 +713,25 @@ L'analyse des données de l'Index Égalité Professionnelle (2018-2024) révèle
 
 | Taille d'entreprise | Note moyenne | Tendance |
 |---------------------|--------------|----------|
-| **1000 et plus** | **83.0** | 🟢 Excellente |
-| **50 à 250** | **83.6** | 🟢 Excellente |
-| **251 à 999** | **82.1** | 🟡 Bonne |
+| **1000 et plus** | **83.0** |  Excellente |
+| **50 à 250** | **83.6** |  Excellente |
+| **251 à 999** | **82.1** |  Bonne |
 
 **Analyse détaillée** :
 
-🏢 **Grandes entreprises (1000+)** :
+ **Grandes entreprises (1000+)** :
 - Note moyenne : **83.0/100**
 - **Forces** : Structures RH établies, politiques formalisées
 - **Tendance** : Légère baisse en 2024 (passage de 83.0 à 82.9)
 - **Hypothèse** : Complexité accrue de gestion avec les effectifs
 
-🏢 **Petites entreprises (50-250)** :
+ **Petites entreprises (50-250)** :
 - Note moyenne : **83.6/100**
 - **Surprise** : Meilleures performances que les moyennes entreprises
 - **Forces** : Proximité managériale, flexibilité
 - **Stabilité** : Performance constante sur 2018-2024
 
-🏢 **Moyennes entreprises (251-999)** :
+ **Moyennes entreprises (251-999)** :
 - Note moyenne : **82.1/100**
 - **Point d'attention** : Scores légèrement inférieurs
 - **Hypothèse** : Phase de transition (croissance, structuration)
@@ -741,17 +741,17 @@ L'analyse des données de l'Index Égalité Professionnelle (2018-2024) révèle
 
 **Tendances générales** :
 
-📅 **2018-2021** : Phase de montée en puissance
+ **2018-2021** : Phase de montée en puissance
 - Mise en place progressive de l'index
 - Hausse constante des notes moyennes
 - Prise de conscience généralisée
 
-📅 **2021-2023** : Plateau de stabilisation
+ **2021-2023** : Plateau de stabilisation
 - Notes autour de 82-83/100
 - Maintien des efforts
 - Stagnation relative
 
-📅 **2024** : Légère inflexion
+ **2024** : Légère inflexion
 - Petite baisse observée (-0.2 point en moyenne)
 - **Hypothèses** :
   - Durcissement des critères d'évaluation
@@ -762,11 +762,11 @@ L'analyse des données de l'Index Égalité Professionnelle (2018-2024) révèle
 
 | Indicateur | 2018 | 2024 | Évolution |
 |------------|------|------|-----------|
-| Rémunération | 35.2 | 36.8 | +4.5% ✅ |
-| Augmentations | 18.5 | 19.2 | +3.8% ✅ |
-| Promotions | 12.8 | 13.5 | +5.5% ✅ |
-| Congé maternité | 14.1 | 14.8 | +5.0% ✅ |
-| Hautes rémunérations | 6.5 | 7.2 | +10.8% ✅ |
+| Rémunération | 35.2 | 36.8 | +4.5%  |
+| Augmentations | 18.5 | 19.2 | +3.8%  |
+| Promotions | 12.8 | 13.5 | +5.5%  |
+| Congé maternité | 14.1 | 14.8 | +5.0%  |
+| Hautes rémunérations | 6.5 | 7.2 | +10.8%  |
 
 **Constat** : Progression sur tous les indicateurs, notamment sur la parité dans les hautes rémunérations (+10.8%).
 
@@ -774,34 +774,34 @@ L'analyse des données de l'Index Égalité Professionnelle (2018-2024) révèle
 
 **Disparités régionales observées** :
 
-🗺️ **Régions performantes** :
+ **Régions performantes** :
 - **Île-de-France** : 84.2/100 (effet grandes entreprises, sièges sociaux)
 - **Auvergne-Rhône-Alpes** : 83.5/100
 - **Pays de la Loire** : 83.1/100
 
-🗺️ **Régions en progression** :
+ **Régions en progression** :
 - **Nouvelle-Aquitaine** : Amélioration de +2.5 points (2018-2024)
 - **Bretagne** : +2.1 points
 
-🗺️ **Points de vigilance** :
+ **Points de vigilance** :
 - Certaines régions DOM-TOM : Scores légèrement inférieurs
 - **Hypothèses** : Tissu économique, secteurs d'activité
 
 ### 5. Points Clés et Recommandations
 
-✅ **Points positifs** :
+ **Points positifs** :
 1. **Progression générale** : +6.5 points en moyenne depuis 2018
 2. **Engagement des entreprises** : 85% des entreprises > 75/100
 3. **Petites entreprises** : Performances exemplaires
 4. **Congés maternité** : Quasi-égalité atteinte (14.8/15)
 
-⚠️ **Points d'amélioration** :
+ **Points d'amélioration** :
 1. **Écarts de rémunération** : Toujours le principal défi
 2. **Hautes rémunérations** : Plafond de verre persistant (7.2/10)
 3. **Moyennes entreprises** : Accompagnement nécessaire
 4. **Disparités régionales** : Réduire les écarts territoriaux
 
-💡 **Recommandations** :
+ **Recommandations** :
 1. **Transparence salariale** : Audits réguliers et grilles claires
 2. **Promotions** : Quotas temporaires et formation des managers
 3. **Hautes rémunérations** : Politique volontariste de féminisation
@@ -818,11 +818,11 @@ La **taille de l'entreprise** n'est pas un facteur déterminant : les petites st
 
 ---
 
-## 🚀 Améliorations possibles
+##  Améliorations possibles
 
 Cette section présente les évolutions et fonctionnalités qui pourraient être ajoutées au projet avec plus de temps et de ressources.
 
-### 1. Enrichissement des données 📊
+### 1. Enrichissement des données 
 
 #### Croisement avec d'autres datasets
 
@@ -842,9 +842,9 @@ secteur_analysis = df_enriched.groupby('secteur')['note_index'].mean()
 ```
 
 **Bénéfices** :
-- ✅ Identifier les secteurs les plus/moins performants
-- ✅ Corréler les performances avec le CA
-- ✅ Analyser l'impact de la forme juridique
+-  Identifier les secteurs les plus/moins performants
+-  Corréler les performances avec le CA
+-  Analyser l'impact de la forme juridique
 
 #### Données temporelles enrichies
 
@@ -871,11 +871,11 @@ def update_graph(selected_secteur):
 ```
 
 **Filtres souhaités** :
-- 🔍 Par région (multi-sélection)
-- 🔍 Par secteur d'activité
-- 🔍 Par tranche d'effectifs personnalisée
-- 🔍 Par fourchette de notes
-- 🔍 Par année (slider temporel)
+-  Par région (multi-sélection)
+-  Par secteur d'activité
+-  Par tranche d'effectifs personnalisée
+-  Par fourchette de notes
+-  Par année (slider temporel)
 
 #### Comparateur d'entreprises
 
@@ -894,11 +894,11 @@ fig = go.Figure(data=go.Scatterpolar(
 
 #### Export de données
 
-- 📥 Export des données filtrées en CSV/Excel
-- 📥 Export des graphiques en PNG/PDF
-- 📥 Génération de rapport PDF automatique
+-  Export des données filtrées en CSV/Excel
+-  Export des graphiques en PNG/PDF
+-  Génération de rapport PDF automatique
 
-### 3. Analyses avancées 📈
+### 3. Analyses avancées 
 
 #### Machine Learning / Prédiction
 
@@ -939,10 +939,10 @@ df['cluster'] = kmeans.fit_predict(X)
 
 #### Analyses statistiques
 
-- 📊 **Tests de corrélation** : Lien entre indicateurs
-- 📊 **ANOVA** : Différences significatives entre régions
-- 📊 **Séries temporelles** : Prédiction avec ARIMA
-- 📊 **Analyse de variance** : Impact de la taille sur les notes
+-  **Tests de corrélation** : Lien entre indicateurs
+-  **ANOVA** : Différences significatives entre régions
+-  **Séries temporelles** : Prédiction avec ARIMA
+-  **Analyse de variance** : Impact de la taille sur les notes
 
 #### NLP sur les rapports
 
@@ -955,14 +955,14 @@ sentiment = pipeline('sentiment-analysis')
 df['sentiment'] = df['commentaires'].apply(lambda x: sentiment(x))
 ```
 
-### 4. Amélioration de l'interface 🎨
+### 4. Amélioration de l'interface 
 
 #### Design moderne
 
-- 🎨 **Thème sombre/clair** : Toggle pour changer le thème
-- 🎨 **Animations CSS** : Transitions fluides entre pages
-- 🎨 **Responsive design** : Optimisation mobile/tablette
-- 🎨 **Composants Dash Bootstrap** : UI plus moderne
+-  **Thème sombre/clair** : Toggle pour changer le thème
+-  **Animations CSS** : Transitions fluides entre pages
+-  **Responsive design** : Optimisation mobile/tablette
+-  **Composants Dash Bootstrap** : UI plus moderne
 
 #### Tableau de bord personnalisable
 
@@ -982,9 +982,9 @@ dcc.Checklist(
 
 #### Tooltips et aide contextuelle
 
-- ❓ Bulles d'aide sur chaque indicateur
-- ❓ Tutoriel interactif au premier lancement
-- ❓ FAQ intégrée
+-  Bulles d'aide sur chaque indicateur
+-  Tutoriel interactif au premier lancement
+-  FAQ intégrée
 
 ### 5. Performance et scalabilité ⚡
 
@@ -1026,15 +1026,15 @@ DB_URL = "postgresql://user:pass@localhost/equalite_pro"
 
 #### Système d'annotations
 
-- 💬 Permettre aux utilisateurs de commenter les données
-- 💬 Signaler des anomalies
-- 💬 Partager des insights
+-  Permettre aux utilisateurs de commenter les données
+-  Signaler des anomalies
+-  Partager des insights
 
 #### Benchmarking
 
-- 🏆 **Classement** : Top 100 des meilleures entreprises
-- 🏆 **Badges** : Certifications selon les scores
-- 🏆 **Progression** : Évolution individuelle des entreprises
+-  **Classement** : Top 100 des meilleures entreprises
+-  **Badges** : Certifications selon les scores
+-  **Progression** : Évolution individuelle des entreprises
 
 #### API REST
 
@@ -1052,7 +1052,7 @@ def get_entreprise(siren):
 - `/api/stats/region/{region}` : Stats par région
 - `/api/export/{format}` : Export données
 
-### 7. Conformité et sécurité 🔒
+### 7. Conformité et sécurité 
 
 #### Authentification
 
@@ -1069,9 +1069,9 @@ app = dash_auth.BasicAuth(app, VALID_USERNAME_PASSWORD_PAIRS)
 
 #### RGPD
 
-- 🔐 Anonymisation des données sensibles
-- 🔐 Consentement cookies
-- 🔐 Droit à l'oubli
+-  Anonymisation des données sensibles
+-  Consentement cookies
+-  Droit à l'oubli
 
 #### Logs et monitoring
 
@@ -1112,11 +1112,11 @@ def test_dashboard_loads():
 
 #### Documentation API
 
-- 📖 Sphinx pour documentation auto-générée
-- 📖 Docstrings complètes sur toutes les fonctions
-- 📖 Exemples d'utilisation
+-  Sphinx pour documentation auto-générée
+-  Docstrings complètes sur toutes les fonctions
+-  Exemples d'utilisation
 
-### 9. Déploiement cloud ☁️
+### 9. Déploiement cloud 
 
 #### Hébergement
 
@@ -1185,9 +1185,9 @@ def get_recommendations(entreprise_id):
 
 #### Simulateur
 
-- 📊 **What-if analysis** : "Si j'améliore X de Y%, quel impact ?"
-- 📊 **Calculateur de conformité** : Estimation du score avant publication
-- 📊 **Plan d'action** : Roadmap personnalisée
+-  **What-if analysis** : "Si j'améliore X de Y%, quel impact ?"
+-  **Calculateur de conformité** : Estimation du score avant publication
+-  **Plan d'action** : Roadmap personnalisée
 
 ---
 
@@ -1195,18 +1195,18 @@ def get_recommendations(entreprise_id):
 
 | Priorité | Amélioration | Effort | Impact |
 |----------|-------------|--------|--------|
-| 🔴 **Haute** | Filtres dynamiques | Moyen | Très élevé |
-| 🔴 **Haute** | Enrichissement secteur | Élevé | Très élevé |
-| 🟡 **Moyenne** | Comparateur entreprises | Moyen | Élevé |
-| 🟡 **Moyenne** | Export données | Faible | Moyen |
-| 🟢 **Basse** | Machine Learning | Très élevé | Moyen |
-| 🟢 **Basse** | API REST | Élevé | Moyen |
+|  **Haute** | Filtres dynamiques | Moyen | Très élevé |
+|  **Haute** | Enrichissement secteur | Élevé | Très élevé |
+|  **Moyenne** | Comparateur entreprises | Moyen | Élevé |
+|  **Moyenne** | Export données | Faible | Moyen |
+|  **Basse** | Machine Learning | Très élevé | Moyen |
+|  **Basse** | API REST | Élevé | Moyen |
 
 **Recommandation** : Commencer par les filtres dynamiques et l'enrichissement des données par secteur pour maximiser l'impact utilisateur.
 
 ---
 
-## 📜 Copyright
+##  Copyright
 
 ### Déclaration d'originalité
 
@@ -1331,8 +1331,8 @@ L'absence ou l'omission de déclaration sera considérée comme du plagiat.
 
 ---
 
-📧 Contact : [lina.ouchaou@edu.esiee.fr](lina.ouchaou@edu.esiee.fr) et [justine.pogeant@edu.esiee.fr](justine.pogeant@edu.esiee.fr)
+ Contact : [lina.ouchaou@edu.esiee.fr](lina.ouchaou@edu.esiee.fr) et [justine.pogeant@edu.esiee.fr](justine.pogeant@edu.esiee.fr)
 
-💻 GitHub : [https://github.com/LinaOuchaouAmroussi/projet_data.git](https://github.com/LinaOuchaouAmroussi/projet_data.git)
+ GitHub : [https://github.com/LinaOuchaouAmroussi/projet_data.git](https://github.com/LinaOuchaouAmroussi/projet_data.git)
 
 </div>
