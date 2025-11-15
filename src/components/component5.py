@@ -1,27 +1,28 @@
 import plotly.graph_objects as go
 """from src.components import df"""
-from config import df
+from config import load_clean_df
 
 
 def create_summary_stats():
     """Crée un résumé statistique des données"""
+    data = load_clean_df()
     return {
-        "Note Moyenne Globale": df["note_index"].mean(),
-        "Nombre d'Entreprises": len(df),
-        "Années Couvertes": f"{df['année'].min()} - {df['année'].max()}",
-        "Note Maximale": df["note_index"].max(),
-        "Note Minimale": df["note_index"].min()
+        "Note Moyenne Globale": data["note_index"].mean(),
+        "Nombre d'Entreprises": len(data),
+        "Années Couvertes": f"{data['annee'].min()} - {data['annee'].max()}",
+        "Note Maximale": data["note_index"].max(),
+        "Note Minimale": data["note_index"].min()
     }
 
 def create_stats_table():
     """Crée une visualisation HTML des statistiques sous forme de tableau"""
-
+    data = load_clean_df()
     stats = {
-        "Note Moyenne Globale": df["note_index"].mean(),
-        "Nombre d'Entreprises": len(df),
-        "Années Couvertes": f"{df['année'].min()} - {df['année'].max()}",
-        "Note Maximale": df["note_index"].max(),
-        "Note Minimale": df["note_index"].min()
+        "Note Moyenne Globale": data["note_index"].mean(),
+        "Nombre d'Entreprises": len(data),
+        "Années Couvertes": f"{data['annee'].min()} - {data['annee'].max()}",
+        "Note Maximale": data["note_index"].max(),
+        "Note Minimale": data["note_index"].min()
     }
 
     fig = go.Figure(data=[go.Table(
@@ -37,14 +38,14 @@ def create_stats_table():
                 list(stats.keys()),
                 [f"{v:.2f}" if isinstance(v, (int, float)) else str(v) for v in stats.values()]
             ],
-            fill_color=[['#f2f2f2', 'white'] * 5],  # bandes zébrées élégantes
+            fill_color=[['#f2f2f2', 'white'] * 5], # alternance des couleurs
             align='center',
             font=dict(color='black', size=14),
             height=38
         )
     )])
 
-    # ✅ Taille auto sans scroll
+    # taille auto
     fig.update_layout(
         height = 450,   # assez grand pour afficher toutes les lignes
         width = None,   # largeur automatique : prend toute la page

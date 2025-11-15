@@ -4,7 +4,8 @@ import geopandas
 import folium
 import io
 import os
-from config import DATA_CLEAN_PATH, RAW_DIR  # ✅ chemins globaux
+from config import RAW_DIR, df 
+
 
 
 def create_map():
@@ -12,20 +13,21 @@ def create_map():
     # Chargement des données
     data = pd.read_csv("data/cleaned/cleaneddata.csv")
     france_dpt = geopandas.read_file("data/raw/departements.json")"""
+
     #Crée la carte Folium et retourne le code HTML sous forme de texte
-    data = pd.read_csv(DATA_CLEAN_PATH)
+   # data = load_clean_df()
     france_dpt_path = os.path.join(RAW_DIR, "departements.json")
     france_dpt = geopandas.read_file(france_dpt_path)
 
     # Nettoyage
-    data_filtered = data.dropna(subset=['note_index'])
+    data_filtered = df.dropna(subset=['note_index'])
 
     # Calcul des moyennes par département
     moyennes_dpt = (
-        data_filtered.groupby('département')['note_index']
+        data_filtered.groupby('departement')['note_index']
         .mean()
         .reset_index()
-        .rename(columns={'département': 'nom', 'note_index': 'note_moyenne'})
+        .rename(columns={'departement': 'nom', 'note_index': 'note_moyenne'})
     )
 
     # Fusion avec le GeoJSON

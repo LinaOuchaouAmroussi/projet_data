@@ -1,42 +1,40 @@
-# -*- coding: utf-8 -*-
 """
-Script principal de lancement du dashboard.
-
-Ce module gère le pipeline complet :
-- Téléchargement des données brutes si nécessaire
-- Nettoyage des données
-- Lancement du serveur Dash
+Notre fichier main qui contient le pipeline complet :
+1. on charge rawdata.csv
+2. on insère dans la table RAW
+3. on nettoie les données
+4. on insère la table CLEAN
+5. on lance l'app
 """
 
-# main.py
-import os
-from src.utils.get_data import download_excel, convert_to_csv
+from config import DATA_RAW_PATH, DATA_CLEAN_CSV, RAW_TABLE, CLEAN_TABLE
+import pandas as pd
 from src.utils.clean_data import clean_data
-from src.app import app
-from config import DATA_RAW_PATH, DATA_CLEAN_PATH, DASHBOARD_PORT, DEBUG_MODE
+from src.utils.db import write_raw_to_db, write_clean_to_db, load_clean_df
 
-def prepare_data():
-    """Télécharge et nettoie les données si elles n'existent pas déjà."""
-    if not os.path.exists(DATA_CLEAN_PATH):
-        print("📥 Données nettoyées introuvables — génération en cours...")
-        if not os.path.exists(DATA_RAW_PATH):
-            print("📊 Téléchargement et conversion des données brutes...")
-            download_excel()
-            convert_to_csv()
-        clean_data()
-    else:
-        print("✅ Données prêtes — aucun traitement nécessaire.")
+print("Pipeline DB : nettoyage + insertion")
+
+# On charge le CSV brut
+print("Chargement du CSV brut…")
+df_raw = pd.read_csv(DATA_RAW_PATH)
+
+# On insère la table RAW dans SQLite
+print("Insertion dans la table RAW…")
+write_raw_to_db(df_raw, table=RAW_TABLE)
+
+# Nettoyage -> DataFrame propre
+print("Nettoyage…")
+df_clean = clean_data()
+
+# 4️-on écrit la table CLEAN dans la base
+print("Écriture table CLEAN…")
+write_clean_to_db(df_clean, table=CLEAN_TABLE)
+
+# On charge le dataframe propre pour le dashboard
+df = load_clean_df()
+
+# on lance notre app
+from src.app import app
 
 if __name__ == "__main__":
-    print("\n" + "="*70)
-    print("🚀 LANCEMENT DU PIPELINE COMPLET")
-    print("="*70)
-    prepare_data()
-    print("\n🎨 Lancement du dashboard...")
-    print(f"🌐 URL : http://127.0.0.1:{DASHBOARD_PORT}/")
-    print("="*70 + "\n")
-    app.run(debug=DEBUG_MODE, port=DASHBOARD_PORT)
-
-# ------------------------------------------------------------
-# Fin de main.py
-# ------------------------------------------------------------
+    app.run(debug=True)

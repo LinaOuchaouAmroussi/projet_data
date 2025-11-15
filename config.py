@@ -1,85 +1,61 @@
-# -*- coding: utf-8 -*-
 """
-Configuration globale du projet Data Dashboard.
-
-Ce module définit les chemins d'accès aux données, charge le DataFrame principal
-et configure les paramètres globaux du dashboard d'égalité professionnelle.
+Configuration globale du projet, de la base de donnée aux chemins de fichiers.
 """
 
-# ============================================================
-# 📁 config.py — Configuration globale du projet Data Dashboard
-# ============================================================
-
-import os
+from pathlib import Path
 import pandas as pd
+from sqlalchemy import create_engine
 
-# ------------------------------------------------------------
-# 🧭 CHEMINS DE BASE
-# ------------------------------------------------------------
-# Répertoire racine du projet (ex: /Users/nom/data_project)
-PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+# nos dossiers
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+RAW_DIR = DATA_DIR / "raw"
+CLEAN_DIR = DATA_DIR / "cleaned"
+WAREHOUSE_DIR = DATA_DIR / "warehouse"
 
-# Dossiers de données
-DATA_DIR = os.path.join(PROJECT_DIR, "data")
-RAW_DIR = os.path.join(DATA_DIR, "raw")
-CLEAN_DIR = os.path.join(DATA_DIR, "cleaned")
+# nos fichiers
+DATA_RAW_PATH = RAW_DIR / "rawdata.csv"
+DATA_CLEAN_CSV = CLEAN_DIR / "cleaneddata.csv"
+DB_PATH = WAREHOUSE_DIR / "data.db"
 
-# Fichiers de données
-DATA_RAW_PATH = os.path.join(RAW_DIR, "rawdata.csv")
-DATA_CLEAN_PATH = os.path.join(CLEAN_DIR, "cleaneddata.csv")
+# URL SQLAlchemy (corrige l'ImportError DB_URL)
+DB_URL = f"sqlite:///{DB_PATH}"
 
-# ------------------------------------------------------------
-# 📦 DONNÉES PRINCIPALES
-# ------------------------------------------------------------
-# On charge les données nettoyées une seule fois au démarrage.
-# Ce DataFrame est ensuite partagé par tous les composants Dash.
-try:
-    df = pd.read_csv(DATA_CLEAN_PATH)
-    print(f"✅ Données chargées depuis : {DATA_CLEAN_PATH}")
-except FileNotFoundError:
-    print(f"⚠️  Fichier nettoyé introuvable à {DATA_CLEAN_PATH}.")
-    print(
-        "   Lancez `main.py` pour télécharger/nettoyer les données "
-        "avant de démarrer le dashboard."
-    )
-    df = pd.DataFrame()  # dataframe vide pour éviter les plantages
+# Engine global
+engine = create_engine(DB_URL, future=True)
 
-# ------------------------------------------------------------
-# 📊 CONFIGURATION DES COLONNES UTILISÉES DANS LES GRAPHIQUES
-# ------------------------------------------------------------
+# Noms de tables
+RAW_TABLE = "index_egalite_raw"
+CLEAN_TABLE = "index_egalite_clean"
+
+# On crée les dossiers si absents
+for d in (RAW_DIR, CLEAN_DIR, WAREHOUSE_DIR):
+    d.mkdir(parents=True, exist_ok=True)
+
+# Nos colonnes clés
 NOTE_COLUMNS = [
-    'note_ecart_rémunération',
-    'note_ecart_taux_d\'augmentation_(hors_promotion)',
-    'note_ecart_taux_de_promotion',
-    'note_ecart_taux_d\'augmentation',
-    'note_retour_congé_maternité',
-    'note_hautes_rémunérations',
-    'note_index'
+    "note_ecart_remuneration",
+    "note_ecart_taux_d'augmentation_(hors_promotion)",
+    "note_ecart_taux_de_promotion",
+    "note_ecart_taux_d'augmentation",
+    "note_retour_conge_maternite",
+    "note_hautes_remunerations",
+    "note_index"
 ]
 
-SIZE_COLUMN = 'tranche_d\'effectifs'
-YEAR_COLUMN = 'année'
-REGION_COLUMN = 'région'
-DEPT_COLUMN = 'département'
+SIZE_COLUMN = "tranche_d'effectifs"
+YEAR_COLUMN = "annee"
+REGION_COLUMN = "region"
+DEPT_COLUMN = "departement"
 
-# ------------------------------------------------------------
-# ⚙️ PARAMÈTRES GLOBAUX DU DASHBOARD
-# ------------------------------------------------------------
-DASHBOARD_TITLE = "Dashboard Égalité Professionnelle"
-DASHBOARD_PORT = 8051
-DEBUG_MODE = True
+# Fonction utilitaire: lire la table CLEAN depuis la base de donnée
+def load_clean_df():
+    try:
+        return pd.read_sql(f"SELECT * FROM {CLEAN_TABLE}", con=engine)
+    except Exception as e:
+        print(f"ATTENTION : Impossible de charger {CLEAN_TABLE} : {e}")
+        return pd.DataFrame()
 
-# ------------------------------------------------------------
-# 📁 AUTRES PARAMÈTRES (optionnels)
-# ------------------------------------------------------------
-# Exemple : lien vers le fichier GeoJSON pour les cartes
-DEPARTEMENTS_GEOJSON = os.path.join(RAW_DIR, "departements.json")
+# ➕ Crée un DataFrame df pour compatibilité avec la suite du projet
+df = load_clean_df()   # ok ici car la table CLEAN existe après le pipeline dans main.py
 
-# ------------------------------------------------------------
-# ✅ UTILISATION :
-# ------------------------------------------------------------
-# from config import df, NOTE_COLUMNS, DATA_CLEAN_PATH
-# from config import DASHBOARD_PORT, DEBUG_MODE
-# ------------------------------------------------------------
-# Fin de config.py
-# ------------------------------------------------------------

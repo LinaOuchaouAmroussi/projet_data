@@ -2,12 +2,12 @@ import re
 import numpy as np
 import pandas as pd
 import plotly.express as px
-from config import df, YEAR_COLUMN, REGION_COLUMN
+from config import load_clean_df, YEAR_COLUMN, REGION_COLUMN
 
 def create_temporal_evolution_plot():
-    dff = df.copy()
+    dff = load_clean_df().copy()
 
-    # --- 1) Nettoyage/tri des années
+    # Nettoyage/tri des années
     def to_year(v):
         if pd.isna(v):
             return np.nan
@@ -24,23 +24,23 @@ def create_temporal_evolution_plot():
     years = sorted(dff[YEAR_COLUMN].astype(int).unique().tolist())
     years_str = list(map(str, years))  # utile si Plotly recaste en str
 
-    # --- 2) Bornes fixes pour éviter que les axes “dansent” à chaque frame
+    # borne fixe pour tous les axes
     pad_x = 1
     pad_y = 1
     x_min, x_max = float(dff["note_index"].min()) - pad_x, float(dff["note_index"].max()) + pad_x
-    y_min, y_max = float(dff["note_ecart_rémunération"].min()) - pad_y, float(dff["note_ecart_rémunération"].max()) + pad_y
+    y_min, y_max = float(dff["note_ecart_remuneration"].min()) - pad_y, float(dff["note_ecart_remuneration"].max()) + pad_y
 
-    # Si tu as un identifiant persistant par entité, mets-le ici (sinon laisse None)
-    entity_id_col = None  # ex: "siret" ou "entreprise_id"
+    
+    entity_id_col = None
 
     fig = px.scatter(
         dff,
         x="note_index",
-        y="note_ecart_rémunération",
+        y="note_ecart_remuneration",
         animation_frame=YEAR_COLUMN,
-        animation_group=entity_id_col,   # None si tu n’as pas d’ID; sinon transitions plus nettes
+        animation_group=entity_id_col,
         color=REGION_COLUMN,
-        category_orders={YEAR_COLUMN: years},  # accepte aussi des int
+        category_orders={YEAR_COLUMN: years},
         title="Évolution des Notes d'Égalité Professionnelle par Année et Région",
         labels={
             "note_index": "Note globale",
@@ -55,8 +55,8 @@ def create_temporal_evolution_plot():
         range_y=[y_min, y_max],
     )
 
-    # --- 3) Forcer l’ordre des frames et des steps
-    # frames (Plotly stocke les noms souvent en str)
+    #forcer l’ordre des frames et des steps
+    # frames
     fig.frames = tuple(sorted(fig.frames, key=lambda f: int(f.name)))
     # steps du slider
     if fig.layout.sliders and len(fig.layout.sliders) > 0:
@@ -79,7 +79,7 @@ def create_temporal_evolution_plot():
         slider["transition"] = {"duration": 0}         # slider lui-même
         slider["currentvalue"] = {"prefix": "Année=", "visible": True}
 
-    # --- 4) Boutons Play/Pause avec l'animation qui marche bien 
+    # boutons Play/Pause avec l'animation qui marche bien 
     if fig.layout.updatemenus and len(fig.layout.updatemenus) > 0:
         # Play: tu peux ajuster ces durées pour l’auto-play
         fig.layout.updatemenus[0].buttons[0].args[1]["frame"]["duration"] = 700
@@ -88,7 +88,7 @@ def create_temporal_evolution_plot():
         fig.layout.updatemenus[0].buttons[1].args[1]["frame"]["duration"] = 0
         fig.layout.updatemenus[0].buttons[1].args[1]["transition"]["duration"] = 0
 
-    # --- 5) Style
+    # Style
     fig.update_layout(
         title_x=0.5,
         showlegend=True,

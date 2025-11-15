@@ -1,7 +1,12 @@
-# src/utils/get_data.py
 import os
 import requests
 import pandas as pd
+
+"""
+Module de récuperation des données brutes venant de l'url https://www.data.gouv.fr/api/1/datasets/r/d434859f-8d3b-4381-bcdb-ec9200653ae6.
+Télecharge le fichier Excel de données et le convertit en CSV.
+Etape préliminaire avant l'insertion et le nettoyage en base de données.
+"""
 
 # URL du fichier Excel sur data.gouv.fr
 DATA_URL = "https://www.data.gouv.fr/api/1/datasets/r/d434859f-8d3b-4381-bcdb-ec9200653ae6"

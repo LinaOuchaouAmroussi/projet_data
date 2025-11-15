@@ -1,11 +1,12 @@
 import plotly.express as px
 """from src.components import df, YEAR_COLUMN, SIZE_COLUMN"""
-from config import df, YEAR_COLUMN, SIZE_COLUMN
+from config import load_clean_df, YEAR_COLUMN, SIZE_COLUMN
 
 def create_size_evolution_plot():
     """Creates the animated evolution plot by company size"""
-    # Calculate means by year and size
-    means = (df.groupby([YEAR_COLUMN, SIZE_COLUMN])
+    # on calcule la moyenne des notes par taille et par année
+    data = load_clean_df()
+    means = (data.groupby([YEAR_COLUMN, SIZE_COLUMN])
             ['note_index'].mean().reset_index())
     
     fig = px.line(
@@ -21,7 +22,7 @@ def create_size_evolution_plot():
         }
     )
     
-    # Update layout for consistent style
+    # on met a jour le layout
     fig.update_layout(
         height=600,
         width=800,
@@ -32,7 +33,7 @@ def create_size_evolution_plot():
         template="plotly_white"
     )
     
-    # Add markers and improve line visibility
+    # Ajout des marqueurs et amélioration de la visibilité des lignes
     fig.update_traces(
         mode='lines+markers',
         line=dict(width=3),
@@ -43,7 +44,7 @@ def create_size_evolution_plot():
         )
     )
     
-    # Smooth animation
+    # Animation
     fig.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 1000
     fig.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 500
     

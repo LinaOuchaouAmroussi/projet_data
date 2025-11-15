@@ -3,13 +3,14 @@ Composant 2 : Notes moyennes par taille d'entreprise
 """
 import plotly.express as px
 """from src.components import df, NOTE_COLUMNS, SIZE_COLUMN"""
-from config import df, NOTE_COLUMNS, SIZE_COLUMN
+from config import load_clean_df, NOTE_COLUMNS, SIZE_COLUMN
 
 def create_size_distribution_plot():
     """Crée le graphique des notes moyennes par taille d'entreprise"""
     
-    # Calculer les moyennes par taille d'entreprise
-    means = df.groupby(SIZE_COLUMN)[NOTE_COLUMNS].mean().reset_index()
+    data = load_clean_df()
+    # on calcule les moyennes par taille d'entreprise
+    means = data.groupby(SIZE_COLUMN)[NOTE_COLUMNS].mean().reset_index()
     
     fig = px.bar(
         means, 
@@ -34,7 +35,7 @@ def create_size_distribution_plot():
         paper_bgcolor='white'
     )
     
-    # Améliorer l'apparence des barres
+    # on modifie l'apparence des barres
     fig.update_traces(
         marker_color='#2874A6',
         marker_line_color='#1B4F72',

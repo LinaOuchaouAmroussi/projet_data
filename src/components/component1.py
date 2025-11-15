@@ -4,14 +4,15 @@ Composant 1 : Distribution des notes
 """
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-"""from src.components import df, NOTE_COLUMNS"""
-from config import df, NOTE_COLUMNS   # ✅ import direct du config global
+from src.utils.db import load_clean_df
+from config import NOTE_COLUMNS
 
 def create_distribution_plot():
     """Creates the distribution plot for all notes"""
+    df = load_clean_df()
     valid_columns = [col for col in NOTE_COLUMNS if col in df.columns]
     
-    # Create subplots avec les spécifications d'axes
+    # on crée les sous-graphiques
     fig = make_subplots(
         rows=len(valid_columns), 
         cols=1,
