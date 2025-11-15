@@ -1,3 +1,7 @@
+"""
+Composant 3 : Évolution temporelle des notes.
+Crée un graphique animé par année et par région.
+"""
 import re
 import numpy as np
 import pandas as pd
@@ -5,10 +9,11 @@ import plotly.express as px
 from config import load_clean_df, YEAR_COLUMN, REGION_COLUMN
 
 def create_temporal_evolution_plot():
+    """Crée le graphique animé de l'évolution des notes par année et région."""
     dff = load_clean_df().copy()
-
     # Nettoyage/tri des années
     def to_year(v):
+        """Convertit une valeur en année entière ou NaN."""
         if pd.isna(v):
             return np.nan
         s = str(v).strip()
@@ -23,16 +28,12 @@ def create_temporal_evolution_plot():
     dff = dff.dropna(subset=[YEAR_COLUMN])
     years = sorted(dff[YEAR_COLUMN].astype(int).unique().tolist())
     years_str = list(map(str, years))  # utile si Plotly recaste en str
-
     # borne fixe pour tous les axes
     pad_x = 1
     pad_y = 1
     x_min, x_max = float(dff["note_index"].min()) - pad_x, float(dff["note_index"].max()) + pad_x
     y_min, y_max = float(dff["note_ecart_remuneration"].min()) - pad_y, float(dff["note_ecart_remuneration"].max()) + pad_y
-
-    
     entity_id_col = None
-
     fig = px.scatter(
         dff,
         x="note_index",
@@ -54,7 +55,6 @@ def create_temporal_evolution_plot():
         range_x=[x_min, x_max],
         range_y=[y_min, y_max],
     )
-
     #forcer l’ordre des frames et des steps
     # frames
     fig.frames = tuple(sorted(fig.frames, key=lambda f: int(f.name)))
@@ -78,7 +78,6 @@ def create_temporal_evolution_plot():
         slider["active"] = 0
         slider["transition"] = {"duration": 0}         # slider lui-même
         slider["currentvalue"] = {"prefix": "Année=", "visible": True}
-
     # boutons Play/Pause avec l'animation qui marche bien 
     if fig.layout.updatemenus and len(fig.layout.updatemenus) > 0:
         # Play: tu peux ajuster ces durées pour l’auto-play
@@ -87,7 +86,6 @@ def create_temporal_evolution_plot():
         # Stop: aucune transition
         fig.layout.updatemenus[0].buttons[1].args[1]["frame"]["duration"] = 0
         fig.layout.updatemenus[0].buttons[1].args[1]["transition"]["duration"] = 0
-
     # Style
     fig.update_layout(
         title_x=0.5,
@@ -99,6 +97,7 @@ def create_temporal_evolution_plot():
         paper_bgcolor="white",
         transition={"duration": 0},  # interactions hors play
     )
-    fig.update_traces(marker=dict(size=10, opacity=0.7, line=dict(width=1, color="white")))
-
+    fig.update_traces(
+        marker={"size": 10, "opacity": 0.7, "line": {"width": 1, "color": "white"}}
+    )
     return fig

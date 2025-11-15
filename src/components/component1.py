@@ -1,6 +1,7 @@
 
 """
 Composant 1 : Distribution des notes
+Crée le graphique de distribution pour toutes les colonnes de notes.
 """
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -11,17 +12,15 @@ def create_distribution_plot():
     """Creates the distribution plot for all notes"""
     df = load_clean_df()
     valid_columns = [col for col in NOTE_COLUMNS if col in df.columns]
-    
     # on crée les sous-graphiques
     fig = make_subplots(
-        rows=len(valid_columns), 
+        rows=len(valid_columns),
         cols=1,
         subplot_titles=[col.replace('_', ' ').title() for col in valid_columns],
         vertical_spacing=0.08,
         x_title="Note obtenue",
         y_title="Nombre d'entreprises"
     )
-    
     for i, col in enumerate(valid_columns, 1):
         valid_data = df[col].dropna()
         if not valid_data.empty:
@@ -32,10 +31,9 @@ def create_distribution_plot():
                     nbinsx=20,
                     marker_color='#5470C6'
                 ),
-                row=i, 
+                row=i,
                 col=1
             )
-    
     # Mise à jour du layout global
     fig.update_layout(
         height=300*len(valid_columns),
@@ -43,29 +41,18 @@ def create_distribution_plot():
         showlegend=False,
         title_text="Distribution des Notes d'Égalité Professionnelle par Catégorie",
         title_x=0.5,
-        title_font=dict(
-            size=24,
-            family='Arial, sans-serif',
-            color='#1f4788'
-        ),
-        font=dict(
-            family='Arial, sans-serif',
-            size=12,
-            color='#2c3e50'
-        )
+        title_font={"size": 24, "family": "Arial, sans-serif", "color": "#1f4788"},
+        font={"family": "Arial, sans-serif", "size": 12, "color": "#2c3e50"},
     )
-    
     # Mise à jour de TOUS les axes X et Y en une seule fois
     fig.update_xaxes(
         title_text="Note obtenue",
-        title_font=dict(size=14, family='Arial, sans-serif', color='#2c3e50'),
-        tickfont=dict(family='Arial, sans-serif', size=11)
+        title_font={"size": 14, "family": "Arial, sans-serif", "color": "#2c3e50"},
+        tickfont={"family": "Arial, sans-serif", "size": 11},
     )
-    
     fig.update_yaxes(
         title_text="Nombre d'entreprises",
-        title_font=dict(size=14, family='Arial, sans-serif', color='#2c3e50'),
-        tickfont=dict(family='Arial, sans-serif', size=11)
+        title_font={"size": 14, "family": "Arial, sans-serif", "color": "#2c3e50"},
+        tickfont={"family": "Arial, sans-serif", "size": 11},
     )
-    
     return fig

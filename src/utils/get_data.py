@@ -1,12 +1,13 @@
+"""
+Module utils.get_data
+
+Télécharge le fichier Excel brut depuis data.gouv.fr et le convertit en CSV.
+"""
+# src/utils/get_data.py
 import os
 import requests
 import pandas as pd
-
-"""
-Module de récuperation des données brutes venant de l'url https://www.data.gouv.fr/api/1/datasets/r/d434859f-8d3b-4381-bcdb-ec9200653ae6.
-Télecharge le fichier Excel de données et le convertit en CSV.
-Etape préliminaire avant l'insertion et le nettoyage en base de données.
-"""
+from config import RAW_DIR  # ✅ on importe le dossier des données brutes
 
 # URL du fichier Excel sur data.gouv.fr
 DATA_URL = "https://www.data.gouv.fr/api/1/datasets/r/d434859f-8d3b-4381-bcdb-ec9200653ae6"
@@ -15,7 +16,7 @@ DATA_URL = "https://www.data.gouv.fr/api/1/datasets/r/d434859f-8d3b-4381-bcdb-ec
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Chemins d'accès à partir du dossier projet_data
-RAW_DIR = os.path.join(PROJECT_DIR, "data", "raw")
+"""RAW_DIR = os.path.join(PROJECT_DIR, "data", "raw")"""
 EXCEL_PATH = os.path.join(RAW_DIR, "rawdata.xlsx")
 CSV_PATH = os.path.join(RAW_DIR, "rawdata.csv")
 
@@ -41,6 +42,9 @@ def convert_to_csv():
     print(f"Fichier converti et enregistré sous {CSV_PATH}")
 
 def main():
+    """
+    Fonction principale : télécharge et convertit le fichier.
+    """
     download_excel()
     convert_to_csv()
 

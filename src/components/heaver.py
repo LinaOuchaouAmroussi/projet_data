@@ -2,16 +2,13 @@
 Header commun avec menu déroulant cliquable
 """
 from dash import html, dcc
-
 def create_header():
     """
     Crée le header avec un bouton ouvrant un menu déroulant
     """
     return html.Div([
-        
         # Conteneur principal
         html.Div([
-            
             # Logo et titre (à gauche)
             html.Div([
                 dcc.Link(
@@ -26,10 +23,8 @@ def create_header():
                     }
                 )
             ], style={'flex': '1'}),
-            
             # Menu déroulant (à droite)
             html.Div([
-                
                 # Bouton pour ouvrir le menu
                 html.Button(
                     " Accéder aux autres pages ▼",
@@ -48,56 +43,43 @@ def create_header():
                         'transition': 'all 0.3s ease'
                     }
                 ),
-                
                 # Menu déroulant (caché par défaut)
                 html.Div([
-                    
                     dcc.Link(
                         " Distribution des Notes",
                         href="/component1",
                         className="dropdown-item"
                     ),
-                    
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
-                    
                     dcc.Link(
                         " Notes par Taille d'Entreprise",
                         href="/component2",
                         className="dropdown-item"
                     ),
-                    
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
-                    
                     dcc.Link(
                         " Évolution Temporelle",
                         href="/component3",
                         className="dropdown-item"
                     ),
-                    
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
-                    
                     dcc.Link(
                         " Évolution par Taille",
                         href="/component4",
                         className="dropdown-item"
                     ),
-                    
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
-                    
                     dcc.Link(
                         " Statistiques Clés",
                         href="/component5",
                         className="dropdown-item"
                     ),
-                    
                     html.Hr(style={'margin': '5px 0', 'borderColor': '#ddd'}),
-                    
                     dcc.Link(
                         " Carte Interactive",
                         href="/map",
                         className="dropdown-item"
                     )
-                    
                 ], id="dropdown-menu", style={
                     'fontFamily': 'Arial, sans-serif',
                     'textAlign': 'center',
@@ -113,11 +95,9 @@ def create_header():
                     'padding': '10px 0',
                     'zIndex': '1000'
                 })
-                
             ], style={
                 'position': 'relative'  # Important pour le positionnement absolu du menu
             })
-            
         ], style={
             'display': 'flex',
             'alignItems': 'center',
@@ -125,7 +105,6 @@ def create_header():
             'margin': '0 auto',
             'padding': '0 20px'
         })
-        
     ], style={
         'backgroundColor': '#1f4788',
         'padding': '15px 0',

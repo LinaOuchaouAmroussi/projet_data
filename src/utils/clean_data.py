@@ -3,13 +3,21 @@ Module de nettoyage des données brutes.
 Lit la table RAW depuis SQLite, nettoie, harmonise les colonnes
 et renvoie un DataFrame propre (le main écrira la table CLEAN).
 """
-
+import re
 import pandas as pd
 import numpy as np
 from config import engine, RAW_TABLE
-import re
 
 def _norm(c: str) -> str:
+    """
+    Normalise le nom d'une colonne : minuscules, underscores et caractères accentués.
+
+    Args:
+        column_name (str): Nom original de la colonne.
+
+    Returns:
+        str: Nom normalisé.
+    """
     return (
         c.strip().lower()
          .replace(" ", "_")
@@ -21,7 +29,15 @@ def _norm(c: str) -> str:
     )
 
 def _clean_numeric(val):
-    """Garde uniquement les chiffres et le point décimal, sinon NaN"""
+    """
+    Extrait un nombre flottant d'une valeur. Si impossible, renvoie NaN.
+
+    Args:
+        value: Valeur à nettoyer.
+
+    Returns:
+        float: Nombre flottant ou NaN.
+    """
     if pd.isna(val):
         return np.nan
     # on extrait le premier nombre flottant trouvé dans la chaîne
@@ -31,6 +47,12 @@ def _clean_numeric(val):
     return np.nan
 
 def clean_data() -> pd.DataFrame:
+    """
+    Lit la table RAW depuis SQLite, nettoie et harmonise les colonnes.
+
+    Returns:
+        pd.DataFrame: DataFrame nettoyé.
+    """
     df = pd.read_sql(f"SELECT * FROM {RAW_TABLE}", con=engine)
     df.columns = [_norm(c) for c in df.columns]
 

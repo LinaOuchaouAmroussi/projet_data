@@ -2,7 +2,6 @@
 Footer professionnel pour le dashboard
 """
 from dash import html
-
 def create_footer():
     """Crée un composant footer réutilisable avec design professionnel"""
     return html.Footer([
@@ -39,7 +38,6 @@ def create_footer():
                     'margin': '0'
                 })
             ], style={'margin': '20px', 'flex': '1'}),
-            
             # Section des liens utiles
             html.Div([
                 html.H4(
@@ -56,7 +54,7 @@ def create_footer():
                     html.Li(
                         html.A(
                             "📄 Documentation", 
-                            href="https://www.data.gouv.fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus/", 
+                            href="https://www.data.gouv.fr/datasets/index-egalite-professionnelle-f-h-des-entreprises-de-50-salaries-ou-plus/",
                             target="_blank",
                             style={
                                 'color': '#e8eaf6',
@@ -71,7 +69,7 @@ def create_footer():
                     html.Li(
                         html.A(
                             "💻 GitHub", 
-                            href="https://github.com/LinaOuchaouAmroussi/projet_data.git", 
+                            href="https://github.com/LinaOuchaouAmroussi/projet_data.git",
                             target="_blank",
                             style={
                                 'color': '#e8eaf6',
@@ -89,7 +87,6 @@ def create_footer():
                     'margin': '0'
                 })
             ], style={'margin': '20px', 'flex': '1'}),
-            
             # Section des informations du projet
             html.Div([
                 html.H4(
@@ -123,7 +120,6 @@ def create_footer():
                     }
                 )
             ], style={'margin': '20px', 'flex': '1'})
-            
         ], style={
             'display': 'flex',
             'justifyContent': 'space-around',
@@ -134,7 +130,6 @@ def create_footer():
             'marginTop': '50px',
             'flexWrap': 'wrap'
         }),
-        
         # Copyright
         html.Div([
             html.P(
@@ -156,8 +151,6 @@ def create_footer():
         'width': '100%',
         'marginTop': 'auto'
     })
-
-
 # CSS pour les effets hover (à ajouter dans votre app)
 FOOTER_CSS = """
 a:hover {

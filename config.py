@@ -1,7 +1,7 @@
 """
-Configuration globale du projet, de la base de donnée aux chemins de fichiers.
-"""
+Configuration globale du projet, de la base de données aux chemins de fichiers.
 
+"""
 from pathlib import Path
 import pandas as pd
 from sqlalchemy import create_engine
@@ -58,4 +58,3 @@ def load_clean_df():
 
 # ➕ Crée un DataFrame df pour compatibilité avec la suite du projet
 df = load_clean_df()   # ok ici car la table CLEAN existe après le pipeline dans main.py
-

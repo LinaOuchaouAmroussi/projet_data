@@ -1,7 +1,9 @@
+"""
+Composant 5 : Statistiques clés.
+Crée un tableau de résumé statistique des notes d'égalité professionnelle.
+"""
 import plotly.graph_objects as go
-"""from src.components import df"""
 from config import load_clean_df
-
 
 def create_summary_stats():
     """Crée un résumé statistique des données"""
@@ -26,31 +28,31 @@ def create_stats_table():
     }
 
     fig = go.Figure(data=[go.Table(
-        header=dict(
-            values=['Indicateur', 'Valeur'],
-            fill_color='#1f4788',
-            align='center',
-            font=dict(color='white', size=16),
-            height=45
-        ),
-        cells=dict(
-            values=[
-                list(stats.keys()),
-                [f"{v:.2f}" if isinstance(v, (int, float)) else str(v) for v in stats.values()]
-            ],
-            fill_color=[['#f2f2f2', 'white'] * 5], # alternance des couleurs
-            align='center',
-            font=dict(color='black', size=14),
-            height=38
-        )
-    )])
-
+        header={
+                    "values": ['Indicateur', 'Valeur'],
+                    "fill_color": '#1f4788',
+                    "align": 'center',
+                    "font": {"color": 'white', "size": 16},
+                    "height": 45,
+                },
+         cells={
+                    "values": [
+                        list(stats.keys()),
+                        [f"{v:.2f}" if isinstance(v, (int, float)) else str(v) for v in stats.values()],
+                    ],
+                    "fill_color": [['#f2f2f2', 'white'] * 5],
+                    "align": 'center',
+                    "font": {"color": 'black', "size": 14},
+                    "height": 38,
+                },
+            )
+        ]
+    )
     # taille auto
     fig.update_layout(
         height = 450,   # assez grand pour afficher toutes les lignes
         width = None,   # largeur automatique : prend toute la page
-        margin=dict(t=40, b=30, l=20, r=20),
+        margin={"t": 40, "b": 30, "l": 20, "r": 20},
         paper_bgcolor='white'
     )
-
     return fig

@@ -1,6 +1,10 @@
 """
-Page du dashboard - Distribution des notes
+Page du dashboard - Distribution des notes.
+
+Affiche le graphique de distribution des notes d'Égalité Professionnelle.
 """
+from src.components.component1 import create_distribution_plot
+
 import sys
 from pathlib import Path
 import dash
@@ -9,8 +13,6 @@ from dash import html, dcc
 # Ajouter le projet au path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root))
-
-from src.components.component1 import create_distribution_plot
 
 # Enregistrer cette page
 dash.register_page(
